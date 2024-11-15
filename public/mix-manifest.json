@@ -1,0 +1,7 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/gridjs/gridjs.umd.js": "/gridjs/gridjs.umd.js",
+    "/css/customResources.css": "/css/customResources.css",
+    "/css/app.css": "/css/app.css",
+    "/gridjs/mermaid.min.css": "/gridjs/mermaid.min.css"
+}

@@ -1,0 +1,82 @@
+.wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    max-width: 95% !important;
+}
+
+.top-container-option {
+    height: max-content;
+}
+
+.margin-50 {
+    margin: 10px;
+}
+
+.base-1-color {
+    color: #5F249F;
+}
+
+.btn-user {
+    max-width: 7em;
+}
+
+.sub-nav-background {
+    background-color: #fbf8ff;
+}
+
+.border-bblr-1 {
+    border-color: #8246AF;
+}
+
+.border-indigo-600 {
+    border-color: #DDE5ED !important;
+}
+
+.text-blue-500 {
+    color: #8246AF !important;
+}
+
+.select2-selection--single {
+    border-color: #512D6D !important;
+    border-width: thin;
+}
+
+.js-consultar-inscritos-single {
+    border-width: thin;
+}
+
+@media screen and (max-width: 1050px) {
+    .container-f-option {
+        display: block !important;
+    }
+}
+
+.dropdown-menu li {
+    position: relative;
+}
+
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+
+.dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+}
+
+.dropdown-menu>li:hover>.dropdown-submenu {
+    display: block;
+}
+
+.dropdown-hover:hover>.dropdown-menu-hover {
+    display: block;
+}
+
+.dropdown-hover>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}

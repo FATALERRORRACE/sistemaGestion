@@ -1,0 +1,41 @@
+import './bootstrap';
+import { Grid } from "gridjs";
+
+$(document).ready(function () {
+    $('.js-example-basic-single').select2();
+
+    new Grid({
+        columns: [
+            {
+                name: 'Name',
+                formatter: (cell) => cell.firstName
+            },
+            "Item", "Nombre Completo", "Usuario", "Correo", "Privilegios", "Estado", "Biblioteca"
+        ],
+        sort: true,
+        pagination: true,
+        resizable: true,
+        selector: (cell, rowIndex, cellIndex) => cellIndex === 0 ? cell.firstName : cell,
+        data: [
+            [{ firstName: 'John', lastName: 'MP' }, 'john@example.com', '(353) 01 222 3333'],
+            [{ firstName: 'Mark', lastName: 'Blue' }, 'mark@gmail.com', '(01) 22 888 4444'],
+            [{ firstName: 'Eoin', lastName: 'Kavanagh' }, 'eo3n@yahoo.com', '(05) 10 878 5554'],
+            [{ firstName: 'John', lastName: 'MP' }, 'john@example.com', '(353) 01 222 3333'],
+            [{ firstName: 'Mark', lastName: 'Blue' }, 'mark@gmail.com', '(01) 22 888 4444'],
+            [{ firstName: 'Eoin', lastName: 'Kavanagh' }, 'eo3n@yahoo.com', '(05) 10 878 5554'],
+            [{ firstName: 'John', lastName: 'MP' }, 'john@example.com', '(353) 01 222 3333'],
+            [{ firstName: 'Mark', lastName: 'Blue' }, 'mark@gmail.com', '(01) 22 888 4444'],
+            [{ firstName: 'Eoin', lastName: 'Kavanagh' }, 'eo3n@yahoo.com', '(05) 10 878 5554'],
+            [{ firstName: 'John', lastName: 'MP' }, 'john@example.com', '(353) 01 222 3333'],
+            [{ firstName: 'Mark', lastName: 'Blue' }, 'mark@gmail.com', '(01) 22 888 4444'],
+            [{ firstName: 'Eoin', lastName: 'Kavanagh' }, 'eo3n@yahoo.com', '(05) 10 878 5554'],
+            [{ firstName: 'John', lastName: 'MP' }, 'john@example.com', '(353) 01 222 3333'],
+            [{ firstName: 'Mark', lastName: 'Blue' }, 'mark@gmail.com', '(01) 22 888 4444'],
+            [{ firstName: 'Eoin', lastName: 'Kavanagh' }, 'eo3n@yahoo.com', '(05) 10 878 5554'],
+            [{ firstName: 'John', lastName: 'MP' }, 'john@example.com', '(353) 01 222 3333'],
+            [{ firstName: 'Mark', lastName: 'Blue' }, 'mark@gmail.com', '(01) 22 888 4444'],
+            [{ firstName: 'Eoin', lastName: 'Kavanagh' }, 'eo3n@yahoo.com', '(05) 10 878 5554'],
+            [{ firstName: 'Megan', lastName: 'Niesen' }, 'nis900@gmail.com', '313 333 1923']
+        ]
+    }).render(document.getElementById("tableContent"));
+});
