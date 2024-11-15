@@ -15,8 +15,8 @@ use App\Http\Controllers\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [IndexController::class, 'index'])->middleware(['auth'])->name('index');
 
-Route::get('/', [IndexController::class, 'index']);
 //Route::get('/', [IndexController::class, 'index'])->middleware(['auth'])->name('index');
 //Route::get('/login', [LoginController::class, 'index']);
 

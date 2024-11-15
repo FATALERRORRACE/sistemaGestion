@@ -1636,11 +1636,19 @@ select {
   .md\:max-w-\[120px\] {
     max-width: 120px;
   }
+
+  .md\:max-w-\[200px\] {
+    max-width: 200px;
+  }
 }
 @media (min-width: 1024px) {
 
   .lg\:max-w-\[150px\] {
     max-width: 150px;
+  }
+
+  .lg\:max-w-\[200px\] {
+    max-width: 200px;
   }
 
   .lg\:px-8 {
