@@ -9,4 +9,10 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.0.0/mdb.umd.min.js"></script>
 <!-- gridjs -->
 <script src="/gridjs/gridjs.umd.js"></script>
-<script src="/js/app.js"></script>
+<script src="/js/app.js" data="{{session('status') }}"></script>
+{{ dd(Session::all())}}
+@if (session('status') == 'active')
+    <script src="/js/home.js"></script>
+@else 
+    <script src="/js/login.js"></script>
+@endif

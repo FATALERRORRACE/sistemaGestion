@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Biblousuarios;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -34,15 +34,18 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'nombre_usuario' => ['required', 'string', 'nombre_usuario', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+        $user = Biblousuarios::create([
+            'nombre_usuario' => "john.doe",
+            'correo' => $request->email,
             'password' => Hash::make($request->password),
+            'biblioteca' => 1,
+            'alias' => $request->name,
+            'privilegios' => 3,
+            'estado' => 1
         ]);
 
         event(new Registered($user));

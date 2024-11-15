@@ -854,6 +854,9 @@ select {
 .w-8 {
   width: 2rem;
 }
+.w-\[42rem\] {
+  width: 42rem;
+}
 .w-auto {
   width: auto;
 }
@@ -1592,10 +1595,6 @@ select {
 
   .sm\:hidden {
     display: none;
-  }
-
-  .sm\:max-w-md {
-    max-width: 28rem;
   }
 
   .sm\:flex-1 {

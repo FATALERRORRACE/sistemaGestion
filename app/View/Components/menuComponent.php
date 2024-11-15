@@ -28,7 +28,7 @@ class menuComponent extends Component
             $html.=
                 "<div class=\"dropdown dropdown-hover\">
                     <button data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init
-                        class=\"border-bblr-1 rounded-lg dropdown-toggle base-1-color btn js-consultar-inscritos-single border-bblr-1 rounded-lg\"
+                        class=\"border-bblr-1 rounded-lg dropdown-toggle base-1-color btn btn-sm js-consultar-inscritos-single border-bblr-1 rounded-lg\"
                         type=\"button\" id=\"menu-{$menu["id"]}\" data-mdb-toggle=\"dropdown\" aria-expanded=\"false\">
                         {$menu["label"]}
                     </button>";

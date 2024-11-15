@@ -1,23 +1,21 @@
 <?php
+namespace App\Http\Controllers\Api;
 
-namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\View;
-use Illuminate\Http\Request;
-use App\Models\Menu;
+use App\Http\Controllers\Controller;
 use App\Models\Consecutivos;
-
-class IndexController extends Controller
+use Illuminate\Http\Request;
+class ConsecutivoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        dump('$request->session()11');
-        dump($request->session());die;
+        dump('$request->test');die;
+        dump($request->test);die;
         return view(
             'index.main'
         );

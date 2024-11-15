@@ -8,10 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Bibliousuarios extends Authenticatable
+class Biblousuarios extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'biblousuarios';
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +25,7 @@ class Bibliousuarios extends Authenticatable
         'biblioteca',
         'alias',
         'privilegios',
-        'estado'
+        'estado'    
     ];
 
     /**
@@ -45,4 +46,10 @@ class Bibliousuarios extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function username()
+    {
+        dump("this must work");die;
+        return 'username';
+    }
 }
