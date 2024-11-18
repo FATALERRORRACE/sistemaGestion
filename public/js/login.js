@@ -2105,7 +2105,7 @@ var headers = new Headers();
 headers.append("Accept", "application/json");
 headers.append("Content-Type", "application/x-www-form-urlencoded");
 $(document).ready(function () {
-  var espacioselect2 = $('#espacio').select2();
+  $('#espacio').select2();
   $(".radio-lg").change(function (ev) {
     fetch("/api/libraries/get?type=".concat(ev.currentTarget.value), {
       method: "GET",

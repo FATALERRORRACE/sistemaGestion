@@ -10,8 +10,7 @@
 <!-- gridjs -->
 <script src="/gridjs/gridjs.umd.js"></script>
 <script src="/js/app.js"></script>
+<script src="/js/login.js"></script>
 @if(session('status') == "ok")
     <script src="/js/home.js"></script>
-@else
-    <script src="/js/login.js"></script>
 @endif

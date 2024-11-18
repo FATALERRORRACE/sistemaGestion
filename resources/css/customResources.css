@@ -103,6 +103,7 @@
     background-color: #60269e; 
     color: #FFF; 
     padding-bottom: 8px;
+    border-radius: 6px;
 }
 #espacio{
     width: 20rem;

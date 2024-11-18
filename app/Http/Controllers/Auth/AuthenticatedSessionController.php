@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -29,9 +30,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        
         $request->authenticate($request);
-        if((int)$request->espacio != (int)Auth::user()->biblioteca){
+        if((int)$request->espacio !== (int)Auth::user()->biblioteca){
             $request->session()->invalidate();
             throw ValidationException::withMessages([
                 'message' => trans('auth.espacio', [
@@ -46,11 +46,12 @@ class AuthenticatedSessionController extends Controller
                 ]),
             ]);
         }
+        //data for session
         $request->session()->regenerate();
         $request->session()->put('privilegios', Auth::user()->privilegios);
         $request->session()->put('estado', Auth::user()->estado);
+        $request->session()->put('username', Auth::user()->nombre_usuario);
         $request->session()->put('biblioteca', Auth::user()->biblioteca);
-        $request->session()->put('status', "ok");
         $request->session()->put('status', "ok");
         return redirect()->intended(RouteServiceProvider::HOME);
     }

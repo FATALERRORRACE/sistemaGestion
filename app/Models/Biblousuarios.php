@@ -20,7 +20,7 @@ class Biblousuarios extends Authenticatable
      */
     protected $fillable = [
         'nombre_usuario',
-        'correo',
+        'email',
         'password',
         'biblioteca',
         'alias',

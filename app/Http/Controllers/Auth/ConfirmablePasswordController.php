@@ -29,7 +29,7 @@ class ConfirmablePasswordController extends Controller
     public function store(Request $request)
     {
         if (! Auth::guard('web')->validate([
-            'nombre_usuario' => $request->user()->nombre_usuario,
+            'alias' => $request->user()->alias,
             'password' => $request->password,
         ])) {
             $request->session()->put('valid', false);

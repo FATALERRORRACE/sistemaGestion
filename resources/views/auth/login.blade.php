@@ -10,23 +10,25 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
-        
-        Solo para funcionarios autorizados de BibloRed. Si pertenece a una de las bibliotecas que prestan el servicio de
-        afiliación y le ha sido asignado un nombre de usuario y contraseña podrá acceder.
+        <p class="text-gray-500 mb-3"> 
+            Solo para funcionarios autorizados de BibloRed. Si pertenece a una de las bibliotecas que prestan el servicio de
+            afiliación y le ha sido asignado un nombre de usuario y contraseña podrá acceder.
+        <p>
         <x-auth-validation-errors class="" :errors="$errors" />
-        <div align="center">
+        <div align="center" class="mb-3">
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
                 <div class="opt-log-radio">
-                    <strong>Acceso:</strong><br>
+                    <span class="font-semibold">Acceso</span>
+                    <br>
                     <input class="radio-lg" type="radio" name="acceso" id="acceso_1" value="1"> Biblioteca
                     <input class="radio-lg" type="radio" name="acceso" id="acceso_2" value="2"> Bibloestación
                     <input class="radio-lg" type="radio" name="acceso" id="acceso_4" value="4"> Sala de lectura
                 </div>
                 <!-- espacio -->
-                <div class="mt-3">
+                <div class="mt-1">
                     <x-label for="espacio" :value="__('Espacio')" />
                     <select name="espacio" id="espacio"
                         class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1">
@@ -34,9 +36,9 @@
                     </select>
                 </div>
                 <!-- user -->
-                <div class="mt-2">
-                    <x-label for="nombre_usuario" :value="__('Usuario')" />
-                    <x-input id="nombre_usuario" class="block mt-1" type="text" name="nombre_usuario" :value="old('username')" required
+                <div class="mt-3">
+                    <x-label for="alias" :value="__('Usuario')" />
+                    <x-input id="alias" class="block mt-1" type="text" name="alias" :value="old('username')" required
                         autofocus />
                 </div>
 
@@ -68,8 +70,8 @@
                 </div>
             </div>-->
         </div>
-        <div style="max-width: 850px; margin: 0px auto;">
-            <p align="justify"><strong>Nota:</strong> No almacene la contraseña en el navegador, ya que esta no
+        <div  class="text-gray-500">
+            <p align="justify"><strong class="text-black">Nota:</strong> No almacene la contraseña en el navegador, ya que esta no
                 se corresponderá con el siguiente ingreso a la herramienta. Si el navegador le autocompleta la
                 contraseña, bórrela y digite la asignada.</p>
         </div>

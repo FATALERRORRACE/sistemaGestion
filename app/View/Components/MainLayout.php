@@ -12,15 +12,12 @@ class MainLayout extends Component
      *
      * @return \Illuminate\View\View
      */
-    public function render()
-    {
+    public function render(){
         $data = Menu::all();
         $menu = $this->setMenuOrder($data->toArray());
-        $libraries = $this->getLibraries();
         return view(
             'layouts.main',
             [
-                'libraries' => $libraries,
                 'menu' => $menu
             ]
         );
@@ -41,6 +38,7 @@ class MainLayout extends Component
                 $menus[$menu["id"]] = [
                     'id' => $menu["id"],
                     'label' => $menu["label"],
+                    'rol' => $menu["rol"],
                     'action' => $menu["action"],
                     'childElements' => [],
                 ];
@@ -58,6 +56,7 @@ class MainLayout extends Component
                     'id' => $menu["id"],
                     'label' => $menu["label"],
                     'action' => $menu["action"],
+                    'rol' => $menu["rol"],
                     'childElements' => [],
                 ];
             } else if (sizeof($menus[$key]['childElements']) > 0) {

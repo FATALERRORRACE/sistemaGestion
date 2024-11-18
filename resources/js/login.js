@@ -4,7 +4,7 @@ headers.append("Accept", "application/json");
 headers.append("Content-Type", "application/x-www-form-urlencoded");
 
 $(document).ready(function () {
-    var espacioselect2 = $('#espacio').select2();
+    $('#espacio').select2();
     $(".radio-lg").change((ev) => {
         fetch(`/api/libraries/get?type=${ev.currentTarget.value}`,
             {

@@ -9,49 +9,39 @@
             </a>
         </div>
         <div class="flex-1 w-64 ">
-
             <div class="flex justify-center">
-                <div class="border-solid rounded-lg border-2 border-indigo-600 container-f-option">
+                <div class="border-solid p-1 rounded-lg border-2 border-indigo-600 container-f-option">
                     <!--First radio-->
-                    <div class="mb-[0.125rem] me-4 inline-block min-h-[1.5rem] ps-[1.5rem]">
-                        <input
-                            class="before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] rtl:float-right dark:border-neutral-400 dark:checked:border-primary"
-                            type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 hover:pointer-events-none"
+                    <div class="me-4 inline-block ">
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso_1" value="1" checked/>
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 "
                             for="inlineRadio1">Biblioteca</label>
                     </div>
 
                     <!--Second radio-->
-                    <div class="mb-[0.125rem] me-4 inline-block min-h-[1.5rem] ps-[1.5rem]">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
-                            class="before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] rtl:float-right dark:border-neutral-400 dark:checked:border-primary" />
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 hover:pointer-events-none"
+                    <div class="me-4 inline-block ">
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso_2" value="2"/>
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 "
                             for="inlineRadio2">Bibloestación</label>
                     </div>
 
                     <!--Third radio (disabled)-->
-                    <div class="mb-[0.125rem] me-4 inline-block min-h-[1.5rem] ps-[1.5rem]">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option4"
-                            class="before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] rtl:float-right dark:border-neutral-400 dark:checked:border-primary" />
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 hover:pointer-events-none"
-                            for="inlineRadio3">Sala de lectura </label>
+                    <div class="me-4 inline-block ">
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso_4" value="4"/>
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="inlineRadio3">Sala de lectura </label>
                     </div>
-                    <div class="mb-[0.125rem] me-4 inline-block min-h-[1.5rem] ps-[1.5rem]">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"
-                            class="before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-checkbox before:shadow-transparent before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-black/60 focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-black/60 focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-checkbox checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] rtl:float-right dark:border-neutral-400 dark:checked:border-primary" />
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 hover:pointer-events-none"
-                            for="inlineRadio4">
+
+                    <div class="me-4 inline-block ">
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso_3" value="3" />
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="inlineRadio4">
                             PPP
                         </label>
                     </div>
                 </div>
             </div>
             <div class="flex justify-center margin-50">
-                <select class="base-1-color js-example-basic-single border-bblr-1">
-                    <option> Selecciona una opción</option>
-                    @foreach ($libraries as $librarie)
-                        <option value="{{ $librarie['Id_Biblioteca'] }}">{{ $librarie['Biblioteca'] }}</option>
-                    @endforeach
+                <select id="espacio" class="base-1-color js-example-basic-single border-bblr-1">
+                    <option>Selecciona una opción</option>
                 </select>
             </div>
         </div>
