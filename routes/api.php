@@ -20,7 +20,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/libraries/get', [ConsecutivoController::class, 'getLibraries']);
-
-
-//$consecutivos = Consecutivos::orderBy('Tipo', 'ASC')->get()->toArray();
-//dump($consecutivos);die;

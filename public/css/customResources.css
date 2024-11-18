@@ -96,3 +96,22 @@
     }
 }
 
+.opt-log-radio{
+    width:100%; 
+    margin:0px auto; 
+    padding-top:8px; 
+    clear: both; 
+    background-color: #60269e; 
+    color: #FFF; 
+    padding-bottom: 8px;
+}
+#espacio{
+    width: 20rem;
+}
+.select2-selection__arrow, .select2-selection__rendered, .select2-selection--single{
+    height: 43px !important;
+    align-content: center;
+}
+.bg-60269e{
+    background-color: #60269e !important;
+}

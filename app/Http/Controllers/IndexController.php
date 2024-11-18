@@ -16,8 +16,6 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        dump('$request->session()11');
-        dump($request->session());die;
         return view(
             'index.main'
         );

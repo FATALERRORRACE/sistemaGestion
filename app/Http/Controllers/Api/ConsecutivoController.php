@@ -21,9 +21,13 @@ class ConsecutivoController extends Controller
         );
     }
 
-    public function getLibraries()
-    {
-        return Consecutivos::all()->toArray();
+    public function getLibraries(Request $request){
+        $consecutivos = 
+            Consecutivos::
+            select(['Id_Biblioteca AS id', 'Biblioteca AS text'])
+            ->where('Tipo', $request->get("type"))
+            ->get()->toArray();
+        return $consecutivos;
     }
 
 }

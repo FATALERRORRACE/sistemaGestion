@@ -59,15 +59,13 @@
             <div class="flex justify-center">11:11</div>
             <div class="flex justify-center">
                 <div class="dropdown dropdown-hover">
-                    <button data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init
-                        class="rounded-lg dropdown-toggle btn rounded-lg" type="button" id="user"
-                        data-mdb-toggle="dropdown" aria-expanded="false">
-                        Pablo Joshua Triviño Bravo
+                    <button data-mdb-button-init data-mdb-ripple-init data-mdb-dropdown-init class="rounded-lg dropdown-toggle btn rounded-lg" type="button" id="user" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i> {{ session('username') }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-hover" aria-labelledby="">
                         <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}" id="submenu-{$menu['id']}">
-                                Cerrar Sesión
+                            <a class="dropdown-item" href="{{ route('logout') }}" id="end-sess">
+                                <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
                             </a>
                             </ulli>
                     </ul>

@@ -12,7 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix
+.js('resources/js/login.js', 'public/js')
 .js('resources/js/app.js', 'public/js')
+.js('resources/js/home.js', 'public/js')
 .js('resources/js/gridjs/gridjs.umd.js', 'public/gridjs')
 .postCss('resources/js/gridjs/mermaid.min.css', 'public/gridjs', [])
 .postCss('resources/css/app.css', 'public/css', [])

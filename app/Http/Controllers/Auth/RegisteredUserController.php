@@ -34,16 +34,15 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_usuario' => ['required', 'string', 'nombre_usuario', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
         $user = Biblousuarios::create([
             'nombre_usuario' => "john.doe",
             'correo' => $request->email,
             'password' => Hash::make($request->password),
             'biblioteca' => 1,
-            'alias' => $request->name,
+            'alias' => $request->nombre_usuario,
             'privilegios' => 3,
             'estado' => 1
         ]);

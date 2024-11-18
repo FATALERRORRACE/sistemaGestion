@@ -7,7 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Consecutivos;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,15 +29,29 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        var_dump("here before");
-        dump($request);die;
         
-        //$request->input('name');
-        //$dump($request);
-        $request->authenticate();
+        $request->authenticate($request);
+        if((int)$request->espacio != (int)Auth::user()->biblioteca){
+            $request->session()->invalidate();
+            throw ValidationException::withMessages([
+                'message' => trans('auth.espacio', [
+                    'usuario' => Auth::user()->nombre_usuario,
+                ]),
+            ]);
 
+            throw ValidationException::withMessages([
+                'nombre_usuario' => trans('auth.throttle', [
+                    'seconds' => $seconds,
+                    'minutes' => ceil($seconds / 60),
+                ]),
+            ]);
+        }
         $request->session()->regenerate();
-
+        $request->session()->put('privilegios', Auth::user()->privilegios);
+        $request->session()->put('estado', Auth::user()->estado);
+        $request->session()->put('biblioteca', Auth::user()->biblioteca);
+        $request->session()->put('status', "ok");
+        $request->session()->put('status', "ok");
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -55,6 +69,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }
