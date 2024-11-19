@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Consecutivos;
 use Illuminate\Http\Request;
-class ConsecutivoController extends Controller
-{
+
+class ConsecutivoController extends Controller{
+
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +25,8 @@ class ConsecutivoController extends Controller
     public function getLibraries(Request $request){
         $consecutivos = 
             Consecutivos::
-            select(['Id_Biblioteca AS id', 'Biblioteca AS text'])
-            ->where('Tipo', $request->get("type"))
+            select(['id_biblioteca AS id', 'biblioteca AS text'])
+            ->where('tipo', $request->get("type"))
             ->get()->toArray();
         return $consecutivos;
     }

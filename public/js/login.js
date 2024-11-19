@@ -2101,9 +2101,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
 
-var headers = new Headers();
-headers.append("Accept", "application/json");
-headers.append("Content-Type", "application/x-www-form-urlencoded");
 $(document).ready(function () {
   $('#espacio').select2();
   $(".radio-lg").change(function (ev) {
@@ -2114,7 +2111,7 @@ $(document).ready(function () {
     }).then(function (response) {
       return response.json().then(function (json) {
         json.unshift({
-          id: 0,
+          id: -1,
           text: 'Seleccione el Espacio'
         });
         $('#espacio').empty().trigger('change');
@@ -2122,10 +2119,7 @@ $(document).ready(function () {
           data: json
         });
       });
-    }).then(function (result) {
-      console.log('result');
-      console.log(result);
-    })["catch"](function (error) {});
+    });
   });
 });
 
@@ -19343,19 +19337,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./resources/js/gridjs/mermaid.min.css":
-/*!*********************************************!*\
-  !*** ./resources/js/gridjs/mermaid.min.css ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -19723,8 +19704,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"axios","version":"0.21.4","de
 /******/ 		var installedChunks = {
 /******/ 			"/js/login": 0,
 /******/ 			"css/customResources": 0,
-/******/ 			"css/app": 0,
-/******/ 			"gridjs/mermaid.min": 0
+/******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -19774,10 +19754,9 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"axios","version":"0.21.4","de
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/customResources","css/app","gridjs/mermaid.min"], () => (__webpack_require__("./resources/js/login.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/customResources","css/app","gridjs/mermaid.min"], () => (__webpack_require__("./resources/js/gridjs/mermaid.min.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/customResources","css/app","gridjs/mermaid.min"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/customResources","css/app","gridjs/mermaid.min"], () => (__webpack_require__("./resources/css/customResources.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/customResources","css/app"], () => (__webpack_require__("./resources/js/login.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/customResources","css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/customResources","css/app"], () => (__webpack_require__("./resources/css/customResources.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

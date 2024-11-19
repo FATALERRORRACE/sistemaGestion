@@ -2,8 +2,7 @@
     "/js/login.js": "/js/login.js",
     "/js/app.js": "/js/app.js",
     "/js/home.js": "/js/home.js",
-    "/gridjs/gridjs.umd.js": "/gridjs/gridjs.umd.js",
+    "/js/btnActions.js": "/js/btnActions.js",
     "/css/customResources.css": "/css/customResources.css",
-    "/css/app.css": "/css/app.css",
-    "/gridjs/mermaid.min.css": "/gridjs/mermaid.min.css"
+    "/css/app.css": "/css/app.css"
 }

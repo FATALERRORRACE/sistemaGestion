@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Biblousuarios;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Models\Menu;
@@ -22,11 +23,6 @@ class IndexController extends Controller
 
             ]
         );
-    }
-
-    public function getLibraries()
-    {
-        return Consecutivos::all()->toArray();
     }
 
 }

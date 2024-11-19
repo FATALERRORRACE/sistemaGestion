@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ConsecutivoController;
+use App\Http\Controllers\Api\UsuariosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,5 @@ use App\Http\Controllers\Api\ConsecutivoController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::get('/users/{library}/get', [UsuariosController::class, 'get']);
 Route::get('/libraries/get', [ConsecutivoController::class, 'getLibraries']);

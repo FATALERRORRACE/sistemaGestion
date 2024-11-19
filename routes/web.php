@@ -17,10 +17,6 @@ use App\Http\Controllers\LoginController;
 */
 Route::get('/', [IndexController::class, 'index'])->middleware(['auth'])->name('index');
 
-//Route::get('/', [IndexController::class, 'index'])->middleware(['auth'])->name('index');
-//Route::get('/login', [LoginController::class, 'index']);
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

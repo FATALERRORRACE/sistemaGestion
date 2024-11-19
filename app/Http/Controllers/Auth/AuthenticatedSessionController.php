@@ -52,6 +52,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->put('estado', Auth::user()->estado);
         $request->session()->put('username', Auth::user()->nombre_usuario);
         $request->session()->put('biblioteca', Auth::user()->biblioteca);
+        $request->session()->put('acceso', $request->acceso);
         $request->session()->put('status', "ok");
         return redirect()->intended(RouteServiceProvider::HOME);
     }

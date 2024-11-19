@@ -742,29 +742,29 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
   var Tt = {
       search: {
-        placeholder: "Type a keyword..."
+        placeholder: "Ingresa un criterio de búsqueda..."
       },
       sort: {
-        sortAsc: "Sort column ascending",
-        sortDesc: "Sort column descending"
+        sortAsc: "Ordenar Columna Ascendente",
+        sortDesc: "Ordenar Columna Descendente"
       },
       pagination: {
-        previous: "Previous",
-        next: "Next",
+        previous: "Anterior",
+        next: "Siguiente",
         navigate: function navigate(t, n) {
-          return "Page " + t + " of " + n;
+          return "Página " + t + " de " + n;
         },
         page: function page(t) {
-          return "Page " + t;
+          return "Página " + t;
         },
-        showing: "Showing",
-        of: "of",
-        to: "to",
-        results: "results"
+        showing: "Mostrando",
+        of: "de",
+        to: "a",
+        results: "resultados"
       },
-      loading: "Loading...",
-      noRecordsFound: "No matching records found",
-      error: "An error happened while fetching the data"
+      loading: "Cargando...",
+      noRecordsFound: "Registros no encontrados",
+      error: "Ocurrió un error cargando los datos"
     },
     Lt = /*#__PURE__*/function () {
       function t(t) {

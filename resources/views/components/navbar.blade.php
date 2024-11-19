@@ -13,16 +13,14 @@
                 <div class="border-solid p-1 rounded-lg border-2 border-indigo-600 container-f-option">
                     <!--First radio-->
                     <div class="me-4 inline-block ">
-                        <input class="radio-lg" type="radio" name="acceso" id="acceso_1" value="1" checked/>
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 "
-                            for="inlineRadio1">Biblioteca</label>
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso_1" value="1"/>
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="inlineRadio1">Biblioteca</label>
                     </div>
 
                     <!--Second radio-->
                     <div class="me-4 inline-block ">
                         <input class="radio-lg" type="radio" name="acceso" id="acceso_2" value="2"/>
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 "
-                            for="inlineRadio2">Bibloestación</label>
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="inlineRadio2">Bibloestación</label>
                     </div>
 
                     <!--Third radio (disabled)-->

@@ -1,3 +1,4 @@
+
 <!-- Jquery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -8,9 +9,17 @@
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.0.0/mdb.umd.min.js"></script>
 <!-- gridjs -->
-<script src="/gridjs/gridjs.umd.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/login.js"></script>
 @if(session('status') == "ok")
+    <script src="/js/btnActions.js"></script>
+    <script>
+        const headers = new Headers();
+        headers.append("Accept", "application/json");
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        var defaultLibrary = {{session('biblioteca')}};
+        var defaultAccess = {{session('acceso')}};
+        var gridInstance;
+    </script>
     <script src="/js/home.js"></script>
 @endif

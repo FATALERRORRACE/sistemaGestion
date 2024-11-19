@@ -115,3 +115,20 @@
 .bg-60269e{
     background-color: #60269e !important;
 }
+.gridjs-head {
+    justify-content: center;
+    display: flex;
+    margin-bottom: 0px !important;
+}
+input.gridjs-input {
+    background-color: #FFFFFF !important;
+    border: 1px solid #4B4F54 !important;
+}
+th.gridjs-th {
+    color: #4B4F54 !important;
+    background-color: #DDE5ED !important;
+}
+.bg-invented-300 {
+    --tw-bg-opacity: 1;
+    background-color: #B5E3D8;
+}

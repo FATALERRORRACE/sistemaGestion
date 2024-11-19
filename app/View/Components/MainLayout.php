@@ -23,11 +23,6 @@ class MainLayout extends Component
         );
     }
 
-    public function getLibraries()
-    {
-        return Consecutivos::all()->toArray();
-    }
-
     public function setMenuOrder($data)
     {
         $menus = [];

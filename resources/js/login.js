@@ -1,8 +1,4 @@
 import './bootstrap';
-var headers = new Headers();
-headers.append("Accept", "application/json");
-headers.append("Content-Type", "application/x-www-form-urlencoded");
-
 $(document).ready(function () {
     $('#espacio').select2();
     $(".radio-lg").change((ev) => {
@@ -13,10 +9,9 @@ $(document).ready(function () {
                 redirect: "follow"
             }
         )
-        .then((response) => 
-            response.json().then(json=>{
+        .then((response) => response.json().then(json => {
                 json.unshift({
-                    id: 0 ,
+                    id: -1,
                     text: 'Seleccione el Espacio'
                 })
                 $('#espacio').empty().trigger('change');
@@ -25,11 +20,5 @@ $(document).ready(function () {
                 });
             })
         )
-        .then((result) => {
-            console.log('result');
-            console.log(result);
-        })
-        .catch((error) => {
-        });
     });
 });
