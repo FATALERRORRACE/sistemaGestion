@@ -16,6 +16,8 @@ mix
 .js('resources/js/app.js', 'public/js')
 .js('resources/js/home.js', 'public/js')
 .js('resources/js/btnActions.js', 'public/js')
+.js('resources/js/mdb.umd.min.js', 'public/js')
 //.postCss('resources/js/gridjs/mermaid.min.css', 'public/gridjs', [])
 .postCss('resources/css/app.css', 'public/css', [])
-.postCss('resources/css/customResources.css', 'public/css', []);
+.postCss('resources/css/customResources.css', 'public/css', [])
+.postCss('resources/css/mdb.min.css', 'public/css', []);

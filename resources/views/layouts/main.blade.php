@@ -10,8 +10,10 @@
 <body class="antialiased">
     @include('components/navbar')
     @include('components/subnavbar')
-    <main role="main" class="wrapper">
+    <main role="main" class="wrapper" id="whole-content">
         {{ $slot }}
+    </main>
+    <main role="main" class="wrapper" id="sub-content">
     </main>
     @include('components/js')
 </body>

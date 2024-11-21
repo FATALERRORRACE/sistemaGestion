@@ -1,4 +1,7 @@
 import './bootstrap';
+import $ from 'jquery';
+import 'select2';
+
 $(document).ready(function () {
     $('#espacio').select2();
     $(".radio-lg").change((ev) => {
@@ -17,7 +20,8 @@ $(document).ready(function () {
                 $('#espacio').empty().trigger('change');
                 $("#espacio").select2({
                     data: json
-                });
+                })
+                $("#espacio").val(defaultLibrary).trigger('change');
             })
         )
     });

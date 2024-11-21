@@ -1,26 +1,25 @@
-import './bootstrap';
+import { Usuarios } from './usuarios';
+import { Utilities } from './utils';
+import $ from 'jquery';
+import 'jquery-ui';
+
+var activeMenu;// for whole content or specific modal
+var activeSubMenu;// for whole content or specific modal
 
 $(document).ready(function () {
-    $("#create-user").button().on("click", function () {
-        dialog.dialog("open");
-    });
-    $("#espacio").change(() => {
+    var instance = new Utilities;
+    instance.render();
 
-    });
     $('#submenu-78').click((ev) => {
-        fetch(`api/users/${0}/get`,
-            {
-                method: "GET",
-                headers: headers,
-                redirect: "follow"
-            }
-        )
-        .then((response) => response.json().then(json => {
-            gridInstance.updateConfig({
-                data: json
-            }).forceRender();
-            gridInstance.data = json;
-            $(".gridjs-head").append(`<button class="mx-3 base-1-color btn rounded-lg p-2"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-user"></i></button>`);
-        }))
+        if(activeMenu == 'Usuarios') return;
+        var instance = new Usuarios;
+        instance.render();
+        activeMenu = 'Usuarios';
+    });
+
+    $('#submenu-82').click((ev) => {
+        if(activeSubMenu == 'biblioteca') return;
+        instance.biblioteca();
+        activeSubMenu = "biblioteca";
     });
 });

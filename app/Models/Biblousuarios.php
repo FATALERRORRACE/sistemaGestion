@@ -25,7 +25,7 @@ class Biblousuarios extends Authenticatable
         'biblioteca',
         'alias',
         'privilegios',
-        'estado'    
+        'estado'
     ];
 
     /**

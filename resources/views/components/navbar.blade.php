@@ -8,30 +8,30 @@
                     class="mr-3 w-full">
             </a>
         </div>
-        <div class="flex-1 w-64 ">
+        <div id="contain-e-t" class="flex-1 w-64 rounded bg-white">
             <div class="flex justify-center">
                 <div class="border-solid p-1 rounded-lg border-2 border-indigo-600 container-f-option">
                     <!--First radio-->
                     <div class="me-4 inline-block ">
-                        <input class="radio-lg" type="radio" name="acceso" id="acceso_1" value="1"/>
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="inlineRadio1">Biblioteca</label>
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso-1" value="1"/>
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="acceso-1">Biblioteca</label>
                     </div>
 
                     <!--Second radio-->
                     <div class="me-4 inline-block ">
-                        <input class="radio-lg" type="radio" name="acceso" id="acceso_2" value="2"/>
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="inlineRadio2">Bibloestación</label>
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso-2" value="2"/>
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="acceso-2">Bibloestación</label>
                     </div>
 
                     <!--Third radio (disabled)-->
                     <div class="me-4 inline-block ">
-                        <input class="radio-lg" type="radio" name="acceso" id="acceso_4" value="4"/>
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="inlineRadio3">Sala de lectura </label>
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso-4" value="4"/>
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="acceso-4">Sala de lectura </label>
                     </div>
 
                     <div class="me-4 inline-block ">
-                        <input class="radio-lg" type="radio" name="acceso" id="acceso_3" value="3" />
-                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="inlineRadio4">
+                        <input class="radio-lg" type="radio" name="acceso" id="acceso-3" value="3" />
+                        <label class="mt-px inline-block ps-[0.15rem] opacity-50 " for="acceso-3">
                             PPP
                         </label>
                     </div>
