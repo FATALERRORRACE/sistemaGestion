@@ -46,7 +46,7 @@
                 <div class="flex">
                     <div class="m-2 w-25">
                         <label class="font-medium text-gray-700" for="email">
-                            Tipo de usuario
+                            Permisos
                         </label>
                     </div>
                     <div class="my-2 mr-3 w-50">
@@ -66,7 +66,7 @@
                     <div class="my-2 mr-3 w-30">
                         <input class="rounded-md shadow-sm border-gray-300" id="place-txt" type="text"
                             name="place-txt" disabled>
-                        <input id="biblioteca" type="hidden" name="biblioteca">
+                        <input id="nubiblioteca" type="hidden" name="nubiblioteca">
                     </div>
                 </div>
             </form>

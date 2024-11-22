@@ -22,7 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //USERS->BIBLIOTECA MODULE
-Route::get('/biblioteca/form',          [BibliotecaController::class, 'getForm']);
+Route::get('/biblioteca/form',      [BibliotecaController::class, 'getForm']);
+Route::post('/biblioteca',          [BibliotecaController::class, 'set']);
+Route::get('/biblioteca/{id}',      [BibliotecaController::class, 'get']);
+Route::post('/biblioteca/{id}',     [BibliotecaController::class, 'update']);
 
 //USERS MODULE
 Route::get('/users/view',               [UsuariosController::class, 'getForm']);

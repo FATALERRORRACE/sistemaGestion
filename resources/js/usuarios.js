@@ -39,10 +39,10 @@ export class Usuarios {
                 redirect: "follow"
             }
         )
-        .then((response) => response.text().then(text => {
-            $("#whole-content").html(text);
-            instance.instanceGrid();
-        }));
+            .then((response) => response.text().then(text => {
+                $("#whole-content").html(text);
+                instance.instanceGrid();
+            }));
     }
 
     async instanceGrid() {
@@ -60,24 +60,25 @@ export class Usuarios {
             data: []
         }).render(document.getElementById("tableContent"));
 
-        await this.createModalCreateUser(); 
-        
+        await this.createModalCreateUser();
+
         $('#espacio').change((ev) => {
             //get data for grid
-            console.log("asdds");
-            fetch(`api/users/${ev.currentTarget.value}/get`,
-            {
-                method: "GET",
-                headers: headers,
-                redirect: "follow"
-            })
-            .then((response) => response.json().then(json => {
-                gridInstance.updateConfig({
-                    data: json
-                }).forceRender();
-                gridInstance.data = json;
-                this.createModalCreateUser();
-            }));
+            if(ev.currentTarget.value != undefined && ev.currentTarget.value != '' ){
+                fetch(`api/users/${ev.currentTarget.value}/get`,
+                {
+                    method: "GET",
+                    headers: headers,
+                    redirect: "follow"
+                })
+                .then((response) => response.json().then(json => {
+                    gridInstance.updateConfig({
+                        data: json
+                    }).forceRender();
+                    gridInstance.data = json;
+                    this.createModalCreateUser();
+                }));
+            }
         });
 
         $("#espacio").trigger("change");
@@ -87,6 +88,8 @@ export class Usuarios {
             height: 'auto',
             width: 'auto',
             modal: true,
+            open: function (event, ui) {
+            },
         });
     }
 
@@ -106,39 +109,38 @@ export class Usuarios {
                 redirect: "follow"
             }
         )
-        .then((response) => response.text().then(text => {
-            $(".ui-dialog-title").text("Nuevo Usuario");
-            $("#dialog-form").html(text);
-            $("#dialog-form").dialog("open");
-            $("#place-txt").val($("#espacio option:selected").text());
-            $("#biblioteca").val($("#espacio").val());
-            $("#save-new-user").click(() => {
-                var dataNewUser = {};
-                $("#nu-form").serializeArray().forEach(element => {
-                    dataNewUser[element.name] = element.value
+            .then((response) => response.text().then(text => {
+                $(".ui-dialog-title").text("Nuevo Usuario");
+                $("#dialog-form").html(text);
+                $("#dialog-form").dialog("open");
+                $("#place-txt").val($("#espacio option:selected").text());
+                $("#nubiblioteca").val($("#espacio").val());
+                $("#save-new-user").click(() => {
+                    var dataNewUser = {};
+                    $("#nu-form").serializeArray().forEach(element => {
+                        dataNewUser[element.name] = element.value
+                    });
+                    fetch(`/api/users`,
+                        {
+                            method: "POST",
+                            headers: headers,
+                            body: JSON.stringify(dataNewUser),
+                        })
+                        .then((response) => response.json().then(json => {
+                            $("#dialog-form").dialog('close');
+                            $("#espacio").trigger("change");
+                            if (json.status == 'ok') {
+                                toastr.success(json.message);
+                            } else {
+                                toastr.error(json.message);
+                            }
+
+                        }));
                 });
-                fetch(`/api/users`,
-                    {
-                        method: "POST",
-                        headers: headers,
-                        body: JSON.stringify(dataNewUser),
-                    }
-                )
-                .then((response) => response.json().then(json => {
+                $("#close-dialog").click(() => {
                     $("#dialog-form").dialog('close');
-                    $("#espacio").trigger("change");
-                    if(json.status == 'ok'){
-                        toastr.success(json.message);
-                    }else{
-                        toastr.error(json.message);
-                    }
-                    
-                }));
-            });
-            $("#close-dialog").click(() => {
-                $("#dialog-form").dialog('close');
-            });
-        }));
+                });
+            }));
     }
 }
 
@@ -151,35 +153,38 @@ window.editUser = ($idUser) => {
             redirect: "follow"
         }
     )
-    .then((response) => response.text().then(text => {
-        $(".ui-dialog-title").text("Editar Usuario");
-        $("#dialog-form").html(text);
-        $("#dialog-form").dialog("open");
-        $("#save-change-user").click(() => {
-            var dataNewUser = {};
-            $("#nu-form").serializeArray().forEach(element => {
-                dataNewUser[element.name] = element.value
+        .then((response) => response.text().then(text => {
+            $(".ui-dialog-title").text("Editar Usuario");
+            $("#dialog-form").html(text);
+            $("#dialog-form").dialog("open");
+            $("#save-change-user").click(() => {
+
+                var dataNewUser = {};
+                $("#nu-form").serializeArray().forEach(element => {
+                    dataNewUser[element.name] = element.value
+                });
+                if ($("#id-edit").val() != undefined) {
+                    fetch(`/api/users/${$("#id-edit").val()}/edit`,
+                        {
+                            method: "POST",
+                            headers: headers,
+                            body: JSON.stringify(dataNewUser),
+                        }
+                    )
+                        .then((response) => response.json().then(json => {
+                            $("#dialog-form").dialog('close');
+                            $("#espacio").trigger("change");
+                            if (json.status == 'ok') {
+                                toastr.success(json.message);
+                            } else {
+                                toastr.error(json.message);
+                            }
+                        }));
+                }
             });
-            fetch(`/api/users/${$("#id-edit").val()}/edit`,
-                {
-                    method: "POST",
-                    headers: headers,
-                    body: JSON.stringify(dataNewUser),
-                }
-            )
-            .then((response) => response.json().then(json => {
+            $("#close-dialog").click(() => {
                 $("#dialog-form").dialog('close');
-                $("#espacio").trigger("change");
-                if(json.status == 'ok'){
-                    toastr.success(json.message);
-                }else{
-                    toastr.error(json.message);
-                }
-            }));
-        });
-        $("#close-dialog").click(() => {
-            $("#dialog-form").dialog('close');
-        });
-    }));
+            });
+        }));
     console.log($idUser);
 }

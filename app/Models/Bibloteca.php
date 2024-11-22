@@ -14,8 +14,16 @@ class Bibloteca extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_biblioteca',
+        'id',
         'nombre_biblioteca',
+        'localidad'
+        //tipo 
+        //codigo = blanco
+        //consectivo
+        //inicial y i_consectivo = 0
+        //impresion = seleccion
+        //carne si 
+        //publioco escolar si/no
     ];
 
 }

@@ -20,6 +20,6 @@ class Consecutivos extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_biblioteca', 'Biblioteca', 'v_consecutivo', 'inicial', 'i_consecutivo', 'impresion', 'carne', 'codigo', 'tipo', 'publico_escolar'
+        'id', 'biblioteca', 'v_consecutivo', 'inicial', 'i_consecutivo', 'localidad', 'impresion', 'carne', 'codigo', 'tipo', 'publico_escolar'
     ];
 }

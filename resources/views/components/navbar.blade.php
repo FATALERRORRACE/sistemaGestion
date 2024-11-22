@@ -39,7 +39,6 @@
             </div>
             <div class="flex justify-center margin-50">
                 <select id="espacio" class="base-1-color js-example-basic-single border-bblr-1">
-                    <option>Selecciona una opción</option>
                 </select>
             </div>
         </div>

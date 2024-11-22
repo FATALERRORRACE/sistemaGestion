@@ -1,8 +1,10 @@
 import $ from 'jquery';;
 import 'select2';
 import 'jquery-ui/ui/widgets/dialog';
+import toastr from "toastr";
 
-export class Utilities{
+export class Utilities {
+    newOrEdit = "new";
     async render() {
         if (defaultAccess) {
             $(`#acceso-${defaultAccess}`).prop("checked", true);
@@ -24,8 +26,8 @@ export class Utilities{
                 $("#espacio").val(defaultLibrary).trigger('change');
             }))
         }
-
         $(".radio-lg").change((ev) => {
+            if(!ev.currentTarget.checked) return;
             fetch(`/api/libraries/get?type=${ev.currentTarget.value}`,
                 {
                     method: "GET",
@@ -45,8 +47,14 @@ export class Utilities{
             }))
         });
     }
-    async biblioteca(){
+
+    async biblioteca(activeSubMenu) {
         var classContext = this;
+        if (activeSubMenu == 'biblioteca') {
+            classContext.bibliotecaInitBefore();
+            return;
+        };
+        
         await fetch(`api/biblioteca/form`,
             {
                 method: "GET",
@@ -55,58 +63,94 @@ export class Utilities{
             }
         )
         .then((response) => response.text().then(text => {
-            $("#sub-content").html(text);
-            $("#dialog-bbltc").dialog({
-                autoOpen: false,
-                position: { my: "top", at: "bottom", of: $('#contain-e-t')},
-                height: 'auto',
-                width: 'auto',
-                modal: true,
-            });
-            //btn-header-dialog
-            $(".ui-dialog-title").prepend($("#btn-header-dialog").html());
-            $("#btn-header-dialog").remove();
-            $("#dialog-bbltc").dialog('open');
-            $("#new-library").click(()=>{
-                
-                classContext.ChangeActiveInactive("new", "edit");
-                $('#contain-e-t').css({"z-index": "10"});
-            });
-            $("#edit-library").click((eve)=>{
-                classContext.ChangeActiveInactive("edit", "new");
-                
-                $('#contain-e-t').css({"z-index": "1000"});
-            });
+            classContext.jqActions(text);
         }));
     }
 
-    async ChangeActiveInactive(active, inactive){
-        $(`#${active}-library`).removeClass('hover:bg-slate-500 bg-slate-200').addClass('hover:bg-blue-700 bg-blue-600');
-        $(`#${inactive}-library`).removeClass('hover:bg-blue-700 bg-blue-600').addClass('hover:bg-slate-500 bg-slate-200');
-        $(`#save-${active}-biblioteca`).css({"display": "block"});
-        $(`#save-${inactive}-biblioteca`).css({"display": "none"});
-    }
-}
+    async jqActions(text) {
+        var classContext = this;
+        $("#sub-content").html(text);
+        $("#dialog-bbltc").dialog({
+            autoOpen: false,
+            position: { my: "top", at: "bottom", of: $('#contain-e-t') },
+            height: 'auto',
+            width: 'auto',
+            modal: false,
+            open: function(event, ui) {
+                $(".ui-dialog-title").text('');
+                setTimeout(() => {
+                    $("#modal-mask").css({'display': 'block'});    
+                }, 200);
+                if(classContext.newOrEdit == 'edit'){
+                    $('#contain-e-t').css({ "z-index": "1000" });
+                    $("#espacio").trigger('change');
+                }
+            },
+            close: function(event, ui) {
+                $('#contain-e-t').css({ "z-index": "10" });
+                $("#modal-mask").css({'display': 'none'});
+            },
+        });
 
-// GLOBAL FUNCTIONS
-window.newLibrary = ($idUser) => {
-    fetch(`api/users/view/${$idUser}/edit`,
-        {
-            method: "GET",
-            headers: headers,
-            redirect: "follow"
-        }
-    )
-    .then((response) => response.text().then(text => {
-        $(".ui-dialog-title").text("Editar Usuario");
-        $("#dialog-form").html(text);
-        $("#dialog-form").dialog("open");
-        $("#save-change-user").click(() => {
+        $("#close-biblioteca-dialog").click(() => {
+            $("#dialog-bbltc").dialog('close');
+        });
+
+        $("#dialog-bbltc").dialog('open');
+
+        $("#new-library").click(() => {
+            classContext.ChangeActiveInactive("new", "edit");
+            $('#contain-e-t').css({ "z-index": "10" });
+            $("#biblioteca").val('');
+            $("#carne").val('');
+            $("#codigo").val('');
+            $("#impresion").prop("checked",false);
+            $("#publico").prop("checked",false);
+            $("#localidad").val('').trigger("change");
+            
+        });
+
+        $("#espacio").change((ev)=>{
+            if(this.newOrEdit == 'new') return;
+            if(ev.currentTarget.value < 0){
+                toastr.warning('Selecciona el Espacio a Editar');
+                return;
+            }
+            fetch(`api/biblioteca/${ev.currentTarget.value}`,
+            {
+                method: "GET",
+                headers: headers,
+            })
+            .then((response) => response.json().then( json => {
+                $("#biblioteca").val(json.biblioteca);
+                $("#carne").val(json.carne);
+                $("#codigo").val(json.codigo);
+                if(json.impresion == 1) $("#impresion").prop("checked",true); else $("#impresion").prop("checked",false);
+                if(json.publico_escolar == 1) $("#publico").prop("checked",true); else $("#publico").prop("checked",false);
+                $("#localidad").val(json.localidad).trigger("change");
+                $(`#bbltcacceso-${json.tipo}`).prop("checked",true);
+            })); 
+        });
+
+        $("#edit-library").click((eve) => {
+            classContext.ChangeActiveInactive("edit", "new");
+            $('#contain-e-t').css({ "z-index": "1000" });
+            $("#espacio").trigger('change');
+        });
+
+        $("#localidad").select2()
+
+        this.saveActions();
+    }
+
+    async saveActions() {
+        $("#save-biblioteca").off().click(()=>{
+            var url = (this.newOrEdit == 'edit' ? `/api/biblioteca/${$("#espacio").val()}` : `api/biblioteca`);
             var dataNewUser = {};
-            $("#nu-form").serializeArray().forEach(element => {
+            $("#biblioteca-form").serializeArray().forEach(element => {
                 dataNewUser[element.name] = element.value
             });
-            fetch(`/api/users/${$("#id-edit").val()}/edit`,
+            fetch(url,
                 {
                     method: "POST",
                     headers: headers,
@@ -114,18 +158,42 @@ window.newLibrary = ($idUser) => {
                 }
             )
             .then((response) => response.json().then(json => {
-                $("#dialog-form").dialog('close');
-                $("#espacio").trigger("change");
-                if(json.status == 'ok'){
+                if (json.status == 'ok'){
                     toastr.success(json.message);
-                }else{
+                    $(`#acceso-${json.tipo}`).prop("checked",true);
+                    fetch(`/api/libraries/get?type=${json.tipo}`,
+                        {
+                            method: "GET",
+                            headers: headers,
+                            redirect: "follow"
+                        }
+                    )
+                    .then((response) => response.json().then(jsonLibrary => {
+                        jsonLibrary.unshift({
+                            id: -1,
+                            text: 'Seleccione el Espacio'
+                        })
+                        $('#espacio').empty().trigger('change');
+                        $("#espacio").select2({
+                            data: jsonLibrary
+                        });
+                        $("#espacio").val(json.id).trigger('change');
+                    }))
+                    $("#dialog-bbltc").dialog('close');
+                } else {
                     toastr.error(json.message);
                 }
             }));
-        });
-        $("#close-dialog").click(() => {
-            $("#dialog-form").dialog('close');
-        });
-    }));
-    console.log($idUser);
+        })
+    }
+
+    async ChangeActiveInactive(active, inactive) {
+        $(`#${active}-library`).removeClass('hover:bg-slate-500 bg-slate-200').addClass('hover:bg-blue-700 bg-blue-600');
+        $(`#${inactive}-library`).removeClass('hover:bg-blue-700 bg-blue-600').addClass('hover:bg-slate-500 bg-slate-200');
+        this.newOrEdit = active;
+    }
+
+    async bibliotecaInitBefore() {
+        $("#dialog-bbltc").dialog('open');
+    }
 }

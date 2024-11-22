@@ -5,30 +5,37 @@ use App\Http\Controllers\Controller;
 use App\Models\Consecutivos;
 use Illuminate\Http\Request;
 
-class ConsecutivoController extends Controller{
-
+class ConsecutivoController extends Controller
+{
     /**
-     * Display a listing of the resource.
+     * Display the main view.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        dump('$request->test');die;
-        dump($request->test);die;
-        return view(
-            'index.main'
-        );
+        // vista principal 'index.main'
+        return view('index.main');
     }
 
-    public function getLibraries(Request $request){
-        $consecutivos = 
-            Consecutivos::
-            select(['id_biblioteca AS id', 'biblioteca AS text'])
-            ->where('tipo', $request->get("type"))
-            ->get()->toArray();
+    /**
+     * Get a list of libraries based on a specified type.
+     *
+     * Este método devuelve una lista de bibliotecas que coinciden con un tipo específico 
+     * proporcionado en la solicitud. Utiliza el modelo 'Consecutivos' para obtener los datos 
+     * de las bibliotecas filtrados por el tipo.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getLibraries(Request $request)
+    {
+        $consecutivos = Consecutivos::select(['id AS id', 'biblioteca AS text'])
+            ->where('tipo', $request->get("type"))  // Filtra por el valor de 'type' en la solicitud
+            ->get()->toArray();  // Obtiene los resultados como un arreglo
+
+        // Retorna el arreglo con los datos de las bibliotecas
         return $consecutivos;
     }
-
 }

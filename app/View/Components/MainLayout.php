@@ -13,8 +13,8 @@ class MainLayout extends Component
      * @return \Illuminate\View\View
      */
     public function render(){
-        $data = Menu::all();
-        $menu = $this->setMenuOrder($data->toArray());
+        $data = Menu::where("activo", 1)->get()->toArray();
+        $menu = $this->setMenuOrder($data);
         return view(
             'layouts.main',
             [

@@ -45,8 +45,8 @@
                 </div>
                 <div class="flex">
                     <div class="m-2 w-25">
-                        <label class="font-medium text-gray-700" for="email">
-                            Tipo de Usuario
+                        <label class="font-medium text-gray-700 w-25" for="email">
+                            Permisos
                         </label>
                     </div>
                     <div class="my-2 mr-3 w-30">
@@ -67,7 +67,7 @@
                     <div class="my-2 mr-3 w-30">
                         <input class="rounded-md shadow-sm border-gray-300" id="place-txt" type="text"
                             name="place-txt" disabled value="{{ $user['biblioteca'] }}">
-                        <input id="biblioteca" type="hidden" name="biblioteca">
+                        <input id="nu-biblioteca" type="hidden" name="nubiblioteca">
                     </div>
                 </div>
                 <div class="flex">
