@@ -1,5 +1,4 @@
-import { Grid, html, h } from "gridjs";
-import 'gridjs/dist/theme/mermaid.min.css';
+import { Grid, html } from "gridjs";
 import { esES } from "gridjs/l10n";
 import $ from 'jquery';
 import 'jquery-ui';
@@ -7,14 +6,14 @@ import toastr from "toastr";
 
 export class Usuarios {
     columns = [
-        { name: "id", width: '60px' },
-        { name: "alias", width: '100px' },
-        { name: "nombre_usuario", width: '180px' },
-        { name: "email", width: '150px' },
-        { name: "biblioteca", width: '150px' },
-        { name: "privilegios", width: '60px' },
+        { id: "id", name: "id", width: '60px' },
+        { id: "alias", name: "Usuario", width: '100px' },
+        { id: "nombre_usuario", name: "Nombre", width: '180px' },
+        { id: "email", name: "Email", width: '150px' },
+        { id: "biblioteca", name: "Biblioteca", width: '150px' },
+        { id: "privilegios", name: "Permisos", width: '60px' },
         {
-            name: "estado", width: '60px',
+            id: "estado", name: "Estado", width: '60px',
             formatter: (cell) => html(cell == 1 ? `<span class="text-emerald-600">Activo</span>` : `<span class="text-red-400">Inactivo</span>`)
         },
         {
@@ -32,37 +31,36 @@ export class Usuarios {
 
     async render() {
         var instance = this;
-        await fetch(`api/users/view`,
-            {
-                method: "GET",
-                headers: headers,
-                redirect: "follow"
-            }
-        )
-            .then((response) => response.text().then(text => {
-                $("#whole-content").html(text);
-                instance.instanceGrid();
-            }));
+        instance.instanceGrid();
     }
 
     async instanceGrid() {
-        gridInstance = await new Grid({
-            className: {
-                tr: 'table-tr-custom',
-            },
-            columns: this.columns,
-            search: true,
-            sort: true,
-            pagination: true,
-            language: esES,
-            resizable: true,
-            selector: (cell, rowIndex, cellIndex) => cellIndex === 0 ? cell.firstName : cell,
-            data: []
-        }).render(document.getElementById("tableContent"));
+        var instance = this;
+        $("#tableContent").empty();
+        if(gridInstance !== undefined)
+            gridInstance.updateConfig({
+                columns: instance.columns,
+                server: false,
+                data: []
+            }).forceRender();
+        else
+            gridInstance = await new Grid({
+                className: {
+                    tr: 'table-tr-custom',
+                },
+                columns: this.columns,
+                search: true,
+                sort: true,
+                pagination: true,
+                language: esES,
+                resizable: true,
+                selector: (cell, rowIndex, cellIndex) => cellIndex === 0 ? cell.firstName : cell,
+                data: []
+            }).render(document.getElementById("tableContent"));
 
         await this.createModalCreateUser();
-
-        $('#espacio').change((ev) => {
+        $('#espacio').off('change.seguimientoespacio');
+        $('#espacio').on('change.usuariosespacio', (ev) => {
             //get data for grid
             if(ev.currentTarget.value != undefined && ev.currentTarget.value != '' ){
                 fetch(`api/users/${ev.currentTarget.value}/get`,
@@ -115,7 +113,7 @@ export class Usuarios {
                 $("#dialog-form").dialog("open");
                 $("#place-txt").val($("#espacio option:selected").text());
                 $("#nubiblioteca").val($("#espacio").val());
-                $("#save-new-user").click(() => {
+                $("#save-new-user").off().on('click.save-newuser', () => {
                     var dataNewUser = {};
                     $("#nu-form").serializeArray().forEach(element => {
                         dataNewUser[element.name] = element.value
@@ -145,8 +143,8 @@ export class Usuarios {
 }
 
 // GLOBAL FUNCTIONS
-window.editUser = ($idUser) => {
-    fetch(`api/users/view/${$idUser}/edit`,
+window.editUser = (idUser) => {
+    fetch(`api/users/view/${idUser}/edit`,
         {
             method: "GET",
             headers: headers,
@@ -157,8 +155,7 @@ window.editUser = ($idUser) => {
             $(".ui-dialog-title").text("Editar Usuario");
             $("#dialog-form").html(text);
             $("#dialog-form").dialog("open");
-            $("#save-change-user").click(() => {
-
+            $("#save-change-user").off().click(() => {
                 var dataNewUser = {};
                 $("#nu-form").serializeArray().forEach(element => {
                     dataNewUser[element.name] = element.value
@@ -182,7 +179,7 @@ window.editUser = ($idUser) => {
                         }));
                 }
             });
-            $("#close-dialog").click(() => {
+            $("#close-dialog").off().click(() => {
                 $("#dialog-form").dialog('close');
             });
         }));

@@ -22,26 +22,27 @@ class BibliotecaController extends Controller
     public function getForm(Request $request)
     {
         $localidades = [
-            1 => "Usaquén",
-            2 => "Chapinero",
-            3 => "Santa Fe",
-            4 => "San Cristóbal",
-            5 => "Usme",
-            6 => "Tunjuelito",
-            7 => "Bosa",
-            8 => "Kennedy",
-            9 => "Fontibón",
-            10 =>  "Engativá",
-            11 =>  "Suba",
-            12 =>  "Barrios Unidos",
-            13 =>  "Teusaquillo",
-            14 =>  "Los Mártires",
-            15 =>  "Antonio Nariño",
-            16 =>  "Puente Aranda",
-            17 =>  "Candelaria",
-            18 =>  "Rafael Uribe Uribe",
-            19 =>  "Ciudad Bolívar",
-            20 =>  "Sumapaz"
+            1 => "1 - Usaquén",
+            2 => "2 - Chapinero",
+            3 => "3 - Santa Fe",
+            4 => "4 - San Cristóbal",
+            5 => "5 - Usme",
+            6 => "6 - Tunjuelito",
+            7 => "7 - Bosa",
+            8 => "8 - Kennedy",
+            9 => "9 - Fontibón",
+            10 =>  "10 - Engativá",
+            11 =>  "11 - Suba",
+            12 =>  "12 - Barrios Unidos",
+            13 =>  "13 - Teusaquillo",
+            14 =>  "14 - Los Mártires",
+            15 =>  "15 - Antonio Nariño",
+            16 =>  "16 - Puente Aranda",
+            17 =>  "17 - Candelaria",
+            18 =>  "18 - Rafael Uribe Uribe",
+            19 =>  "19 - Ciudad Bolívar",
+            20 =>  "20 - Sumapaz",
+            21 =>  "20 - Otros"
         ];
         return view('biblioteca', ['localidades' => $localidades]);
     }

@@ -75,6 +75,7 @@ input:checked+.slider:before {
 
 .base-1-color {
     color: #5F249F;
+    background-color: #fff;
 }
 
 .btn-user {
@@ -82,7 +83,7 @@ input:checked+.slider:before {
 }
 
 .sub-nav-background {
-    background-color: #fbf8ff;
+    background-color: #c1a7e22f;
 }
 
 .border-bblr-1 {
@@ -248,16 +249,13 @@ th.gridjs-th {
 #save-new-user {
     font-size: 0.8em !important;
 }
-
 .ui-dialog-title {
     color: #4B4F54;
 }
-
 .ui-dialog-titlebar {
     border: none;
     background-color: white;
 }
-
 .ui-dialog {
     border-radius: 0.25rem;
     padding: 8px;
@@ -268,10 +266,31 @@ th.gridjs-th {
 .ui-dialog .btn{
     text-transform: capitalize !important;
 }
-
 .select2-dropdown, .select2-search__field {
     z-index: 10060 !important;
 }
 .select2-container--open, .select2-container--open {
     z-index: 9999999
+}
+.ui-dialog-title {
+    color:#009F4D;
+}
+.ui-tabs .ui-tabs-panel {
+    padding: 0em !important;
+}
+.ui-widget.ui-widget-content {
+    border: none;
+}
+.ui-tabs-nav {
+    background-color: #fff !important;
+    border: none !important;
+    border-bottom: 1px solid #009F4D !important;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 2px solid #009f4d2e !important;
+    background-color: #009F4D !important;
+}
+#filter-submenu{
+    padding-left: 10px;
+    padding-right: 7px;
 }

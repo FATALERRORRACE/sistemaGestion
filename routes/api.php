@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ConsecutivoController;
 use App\Http\Controllers\Api\UsuariosController;
 use App\Http\Controllers\Api\BibliotecaController;
+use App\Http\Controllers\Api\RegistrosController;
 
 
 /*
@@ -21,6 +22,12 @@ use App\Http\Controllers\Api\BibliotecaController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//SEGUIMIENTO MODULE
+Route::get('/registro/{library}/get',   [RegistrosController::class, 'get']);
+Route::get('/registro/form/{id}',       [RegistrosController::class, 'getForm']);
+Route::get('/localidad/{id}/barrio',    [RegistrosController::class, 'getBarrio']);
+
 //USERS->BIBLIOTECA MODULE
 Route::get('/biblioteca/form',      [BibliotecaController::class, 'getForm']);
 Route::post('/biblioteca',          [BibliotecaController::class, 'set']);

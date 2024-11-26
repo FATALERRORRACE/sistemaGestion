@@ -1,6 +1,7 @@
 import $ from 'jquery';;
 import 'select2';
 import 'jquery-ui/ui/widgets/dialog';
+import 'jquery-ui/ui/effects/effect-highlight';
 import toastr from "toastr";
 
 export class Utilities {
@@ -46,6 +47,42 @@ export class Utilities {
                 });
             }))
         });
+
+        $("#search-by-menu").select2();
+
+        $("#filter-submenu").click(()=>{
+            $("#filter-menu-dropdown").data("open");
+            $("#filter-menu-dropdown").css({'display': "block"}).data("open",1);
+        });
+
+        $("#close-submenu-filter").click(()=>{
+            $("#filter-menu-dropdown").css({'display': "none"}).data("open",0);
+        });
+
+        $("#search-by-menu").change((eveS)=>{
+            if($("#filter-menu-dropdown").data("open") == 1){
+                $(".dropdown-menu-hover").attr('style', false);
+                $(".sub-dropdown-menu").attr('style', false);
+                $("#" + eveS.currentTarget.value).trigger('click');
+                var parent = $("#" + eveS.currentTarget.value).parent();
+                do {
+                    if(parent[0].localName == 'ul'){
+                        parent.fadeIn(400)
+                        $("#" + eveS.currentTarget.value).effect('highlight', {}, 1500);
+                    };
+                    parent = parent.parent();
+                } while ( parent[0].localName != 'div');
+
+                $(".dropdown-menu-hover").fadeOut(3000)
+                $(".sub-dropdown-menu").fadeOut(3000)
+                setTimeout(() => {
+                    $(".dropdown-menu-hover").attr('style', false);
+                    $(".sub-dropdown-menu").attr('style', false);
+                }, 3000);
+                $("#filter-menu-dropdown").css({'display': "none"}).data("open",0);
+            }   
+        });
+        $("#search-by-menu").closest('.list_product').css({'display': "block"});
     }
 
     async biblioteca(activeSubMenu) {
@@ -54,7 +91,6 @@ export class Utilities {
             classContext.bibliotecaInitBefore();
             return;
         };
-        
         await fetch(`api/biblioteca/form`,
             {
                 method: "GET",
@@ -98,7 +134,7 @@ export class Utilities {
 
         $("#dialog-bbltc").dialog('open');
 
-        $("#new-library").click(() => {
+        $("#new-library").off().click(() => {
             classContext.ChangeActiveInactive("new", "edit");
             $('#contain-e-t').css({ "z-index": "10" });
             $("#biblioteca").val('');
@@ -109,8 +145,8 @@ export class Utilities {
             $("#localidad").val('').trigger("change");
             
         });
-
-        $("#espacio").change((ev)=>{
+        
+        $("#espacio").on('change.utilsespacio', (ev) => {
             if(this.newOrEdit == 'new') return;
             if(ev.currentTarget.value < 0){
                 toastr.warning('Selecciona el Espacio a Editar');

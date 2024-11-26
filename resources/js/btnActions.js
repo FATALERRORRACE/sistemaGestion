@@ -1,20 +1,27 @@
 import { Usuarios } from './usuarios';
+import { Seguimiento } from './seguimiento';
 import { Utilities } from './utils';
+import { Prestamos } from './prestamos';
 import $ from 'jquery';
 import 'jquery-ui';
 
 var activeMenu;// for whole content or specific modal
 var activeSubMenu;// for whole content or specific modal
-
+var instanceUtils;// Base Instance
+var instanceUsers, instanceSeguimiento, prestamosInstance;
 $(document).ready(function () {
-    var instanceUtils = new Utilities;
+    instanceUtils = new Utilities;
     instanceUtils.render();
 
+    $('.dropdown-item').click((ev) => {
+        instanceUsers, instanceSeguimiento, prestamosInstance = null;// clean previous instances to not load to much cpu
+    });
+
     $('#submenu-78').click((ev) => {
-        if(activeMenu == 'Usuarios') return;
-        var instanceUsers = new Usuarios;
+        if(activeMenu == 'usuarios') return;
+        instanceUsers = new Usuarios;
         instanceUsers.render();
-        activeMenu = 'Usuarios';
+        activeMenu = 'usuarios';
     });
 
     $('#submenu-82').click((ev) => {
@@ -23,8 +30,17 @@ $(document).ready(function () {
     });
 
     $('#submenu-58').click((ev) => {
-        instanceUtils.biblioteca(activeSubMenu);
-        activeSubMenu = "biblioteca";
+        if(activeMenu == 'seguimiento') return;
+        instanceSeguimiento = new Seguimiento;
+        instanceSeguimiento.render();
+        activeMenu = "seguimiento";
     });
-    
+
+    $('#submenu-91').click((ev) => {
+        if(activeMenu == 'prestamos') return;
+        prestamosInstance = new Prestamos;
+        prestamosInstance.render();
+        activeMenu = "prestamos";
+    });
+
 });

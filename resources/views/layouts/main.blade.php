@@ -13,7 +13,10 @@
     <main role="main" class="wrapper" id="whole-content">
         {{ $slot }}
     </main>
-    <main role="main" class="wrapper" id="sub-content">
+    <main class="wrapper">
+        <div id="tableContent"></div>
+        <div id="dialog-form"></div>
+        <div id="sub-content"></div>
     </main>
     @include('components/js')
 </body>
