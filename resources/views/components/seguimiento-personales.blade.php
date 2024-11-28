@@ -28,7 +28,6 @@
         </div>
 
         <div class="flex flex-row justify-between">
-
             <div class="m-2 w-50">
                 <label class="font-medium text-gray-700 block opacity-80" for="tdocumento">
                     <i class="fa-solid fa-id-card"></i> Tipo de documento

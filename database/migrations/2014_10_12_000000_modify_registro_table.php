@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class ModifyRegistroTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('registro', function (Blueprint $table) {
-            $table->addColumn('tinyInteger', 'departamento', ['length' => 2]);
+        
+        Schema::table('consecutivos', function (Blueprint $table) {
+            $table->dateTime('updated_at', 0)->nullable();
+            $table->dateTime('created_at', 0)->nullable();
         });
     }
 

@@ -1,7 +1,7 @@
 import { Grid, html } from "gridjs";
 import { esES } from "gridjs/l10n";
 import $ from 'jquery';
-import 'jquery-ui';
+import 'jquery-ui/ui/widgets/dialog';
 import toastr from "toastr";
 
 export class Usuarios {
@@ -10,7 +10,7 @@ export class Usuarios {
         { id: "alias", name: "Usuario", width: '100px' },
         { id: "nombre_usuario", name: "Nombre", width: '180px' },
         { id: "email", name: "Email", width: '150px' },
-        { id: "biblioteca", name: "Biblioteca", width: '150px' },
+        { id: "Biblioteca", name: "Biblioteca", width: '150px' },
         { id: "privilegios", name: "Permisos", width: '60px' },
         {
             id: "estado", name: "Estado", width: '60px',
@@ -107,38 +107,38 @@ export class Usuarios {
                 redirect: "follow"
             }
         )
-            .then((response) => response.text().then(text => {
-                $(".ui-dialog-title").text("Nuevo Usuario");
-                $("#dialog-form").html(text);
-                $("#dialog-form").dialog("open");
-                $("#place-txt").val($("#espacio option:selected").text());
-                $("#nubiblioteca").val($("#espacio").val());
-                $("#save-new-user").off().on('click.save-newuser', () => {
-                    var dataNewUser = {};
-                    $("#nu-form").serializeArray().forEach(element => {
-                        dataNewUser[element.name] = element.value
-                    });
-                    fetch(`/api/users`,
-                        {
-                            method: "POST",
-                            headers: headers,
-                            body: JSON.stringify(dataNewUser),
-                        })
-                        .then((response) => response.json().then(json => {
-                            $("#dialog-form").dialog('close');
-                            $("#espacio").trigger("change");
-                            if (json.status == 'ok') {
-                                toastr.success(json.message);
-                            } else {
-                                toastr.error(json.message);
-                            }
+        .then((response) => response.text().then(text => {
+            $(".ui-dialog-title").text("Nuevo Usuario");
+            $("#dialog-form").html(text);
+            $("#dialog-form").dialog("open");
+            $("#place-txt").val($("#espacio option:selected").text());
+            $("#nubiblioteca").val($("#espacio").val());
+            $("#save-new-user").off().on('click.save-newuser', () => {
+                var dataNewUser = {};
+                $("#nu-form").serializeArray().forEach(element => {
+                    dataNewUser[element.name] = element.value
+                });
+                fetch(`/api/users`,
+                    {
+                        method: "POST",
+                        headers: headers,
+                        body: JSON.stringify(dataNewUser),
+                    })
+                    .then((response) => response.json().then(json => {
+                        $("#dialog-form").dialog('close');
+                        $("#espacio").trigger("change");
+                        if (json.status == 'ok') {
+                            toastr.success(json.message);
+                        } else {
+                            toastr.error(json.message);
+                        }
 
-                        }));
-                });
-                $("#close-dialog").click(() => {
-                    $("#dialog-form").dialog('close');
-                });
-            }));
+                    }));
+            });
+            $("#close-dialog").click(() => {
+                $("#dialog-form").dialog('close');
+            });
+        }));
     }
 }
 
@@ -151,37 +151,36 @@ window.editUser = (idUser) => {
             redirect: "follow"
         }
     )
-        .then((response) => response.text().then(text => {
-            $(".ui-dialog-title").text("Editar Usuario");
-            $("#dialog-form").html(text);
-            $("#dialog-form").dialog("open");
-            $("#save-change-user").off().click(() => {
-                var dataNewUser = {};
-                $("#nu-form").serializeArray().forEach(element => {
-                    dataNewUser[element.name] = element.value
-                });
-                if ($("#id-edit").val() != undefined) {
-                    fetch(`/api/users/${$("#id-edit").val()}/edit`,
-                        {
-                            method: "POST",
-                            headers: headers,
-                            body: JSON.stringify(dataNewUser),
+    .then((response) => response.text().then(text => {
+        $(".ui-dialog-title").text("Editar Usuario");
+        $("#dialog-form").html(text);
+        $("#dialog-form").dialog("open");
+        $("#save-change-user").off().click(() => {
+            var dataNewUser = {};
+            $("#nu-form").serializeArray().forEach(element => {
+                dataNewUser[element.name] = element.value
+            });
+            if ($("#id-edit").val() != undefined) {
+                fetch(`/api/users/${$("#id-edit").val()}/edit`,
+                    {
+                        method: "POST",
+                        headers: headers,
+                        body: JSON.stringify(dataNewUser),
+                    }
+                )
+                    .then((response) => response.json().then(json => {
+                        $("#dialog-form").dialog('close');
+                        $("#espacio").trigger("change");
+                        if (json.status == 'ok') {
+                            toastr.success(json.message);
+                        } else {
+                            toastr.error(json.message);
                         }
-                    )
-                        .then((response) => response.json().then(json => {
-                            $("#dialog-form").dialog('close');
-                            $("#espacio").trigger("change");
-                            if (json.status == 'ok') {
-                                toastr.success(json.message);
-                            } else {
-                                toastr.error(json.message);
-                            }
-                        }));
-                }
-            });
-            $("#close-dialog").off().click(() => {
-                $("#dialog-form").dialog('close');
-            });
-        }));
-    console.log($idUser);
+                    }));
+            }
+        });
+        $("#close-dialog").off().click(() => {
+            $("#dialog-form").dialog('close');
+        });
+    }));
 }

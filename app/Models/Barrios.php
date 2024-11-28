@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Barrio extends Model
+class Barrios extends Model
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $table = 'barrio';
+    protected $table = 'barrios';
 
     /**
      * The attributes that are mass assignable.
@@ -20,8 +20,11 @@ class Barrio extends Model
      */
     protected $fillable = [
         'id',
-        'codigo',
-        'localidad',
-        'nombre',
+        'nomb_barr',
+        'codi_barr_dane',
+        'acti_barr',
+        'orde_barr',
+        'localidad_id',
+        'municipio_id',
     ];
 }

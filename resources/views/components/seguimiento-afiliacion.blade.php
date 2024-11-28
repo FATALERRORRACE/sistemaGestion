@@ -19,18 +19,22 @@
                     <i class="fa-solid fa-map-location-dot"></i> ¿Cuál es tu ciudad o departamento de residencia?
                 </label>
                 <select  class="rounded-md shadow-sm border-gray-300 w-100" id="diremuni" name="diremuni" required="" style="width: 100%">
+                    @foreach ($departamentos as $departamento)
+                        <option value="{{ $departamento['codi_dane_depa'] }}" {{ $departamento['codi_dane_depa'] == $registro['localidad_numero'] ? 'selected="selected"' : '' }}>{{ $departamento['nomb_depa'] }}</option>
+                    @endforeach
                     @include('components/select-departamento')
                 </select>
             </div>
             <div class="m-2 basis-2/5 w-33 ">
                 <label class="font-medium text-gray-700 block opacity-80 mt-4" for="localidad">
-                    <i class="fa-solid fa-map-location-dot"></i> ¿En qué localidad vives?
+                    <i class="fa-solid fa-map-location-dot"></i> ¿En qué localidad vives?{{$registro['localidad_numero']}}
                 </label>
+                
                 <select class="rounded-md shadow-sm border-gray-300 w-100" id="localidad" name="localidad" style="width: 100%"
                     required="required">
                     <option>Selecciona una localidad</option>
-                    @foreach ($localidades as $key => $localidad)
-                        <option value="{{ $key }}" {{ $key == $registro['localidad'] ? 'selected="selected"' : '' }}>{{ $localidad }}</option>
+                    @foreach ($localidades as $localidad)
+                        <option value="{{ $localidad['id'] }}" {{ $localidad['id'] == $registro['departamento_codigo'] ? 'selected="selected"' : '' }}>{{ $localidad['nombre'] }}</option>
                     @endforeach
                 </select>
             </div>
@@ -39,9 +43,9 @@
                     <i class="fa-solid fa-map-location-dot"></i> ¿En qué barrio vives?
                 </label>
                 <select class="rounded-md shadow-sm border-gray-300 w-100" id="barrio" type="text" name="nombre" style="width: 100%" 
-                    required="required" data-value="{{ $registro['barrio'] }}">
+                    required="required" data-value="{{ $registro['barrio_id'] }}">
                     @foreach ($barrios as $key => $barrioElement)
-                        <option value="{{ $barrioElement['codigo'] }}" {{ $barrio['id'] == $barrioElement['id'] ? 'selected="selected"' : '' }}>{{ $barrioElement['nombre'] }}</option>
+                        <option value="{{ $barrioElement['codigo'] }}" {{ $registro['barrio_id'] == $barrioElement['id'] ? 'selected="selected"' : '' }}>{{ $barrioElement['nombre'] }}</option>
                     @endforeach
                 </select>
             </div>

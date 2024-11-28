@@ -68,18 +68,17 @@ class BibliotecaController extends Controller
             'localidad' => ['required'],
         ]);
 
-
         $consecutivo = Consecutivos::create([
-            'biblioteca' => $request->biblioteca,
-            'impresion' => $request->impresion == 'on' ? 1 : 0,
-            'localidad' => (int)$request->localidad,
-            'carne' => $request->carne,
-            'codigo' => $request->codigo,
-            'inicial' => 0,
-            'v_consecutivo' => 0,
-            'i_consecutivo' => 0,
-            'tipo' => $request->bbltcacceso,
-            'publico_escolar' => $request->publico == 'on' ? 1 : 0
+            'Biblioteca' => $request->biblioteca,
+            //'impresion' => $request->impresion == 'on' ? 1 : 0,
+            'Localidad' => (int)$request->localidad,
+            //'carne' => $request->carne,
+            //'codigo' => $request->codigo,
+            //'inicial' => 0,
+            //'v_consecutivo' => 0,
+            //'i_consecutivo' => 0,
+            'Tipo' => $request->bbltcacceso,
+            //'publico_escolar' => $request->publico == 'on' ? 1 : 0
         ]);
         // Retorna una respuesta de éxito o error según el resultado de la creación
         return $consecutivo ?
@@ -107,7 +106,7 @@ class BibliotecaController extends Controller
      */
     public function get($idBiblioteca, Request $request)
     {
-        return Consecutivos::where('id', $idBiblioteca)->first();
+        return Consecutivos::where('Id_Biblioteca', $idBiblioteca)->first();
     }
 
     /**
@@ -122,19 +121,19 @@ class BibliotecaController extends Controller
      */
     public function update($idBiblioteca, Request $request)
     {
+
         // Prepara los datos que se actualizarán en la base de datos
         $newData = [
-            'biblioteca' => $request->biblioteca,
-            'impresion' => $request->impresion == 'on' ? 1 : 0,
-            'carne' => $request->carne,
-            'localidad' => (int)$request->localidad,
-            'codigo' => $request->codigo,   
-            'tipo' => $request->bbltcacceso,
-            'publico_escolar' => $request->publico == 'on' ? 1 : 0
+            'Biblioteca' => $request->biblioteca,
+            //'impresion' => $request->impresion == 'on' ? 1 : 0,
+            //'carne' => $request->carne,
+            'Localidad' => (int)$request->localidad,
+            //'codigo' => $request->codigo,   
+            'Tipo' => $request->bbltcacceso,
+            //'publico_escolar' => $request->publico == 'on' ? 1 : 0
         ];
 
-        // Realiza la actualización en la base de datos y devuelve un mensaje de éxito o error
-        return Consecutivos::where('id', $idBiblioteca)->update($newData) ?
+        return Consecutivos::where('Id_Biblioteca', $idBiblioteca)->update($newData) ?
             ['status' => 'ok', 'message' => "¡Biblioteca {$request->biblioteca} actualizada!",
                 'id' => $idBiblioteca,
                 'tipo' => $request->bbltcacceso

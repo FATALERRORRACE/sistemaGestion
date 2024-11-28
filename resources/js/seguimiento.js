@@ -9,11 +9,11 @@ import toastr from "toastr";
 export class Seguimiento {
 
     columns = [
-        { id: 'consecutivo', name: 'consecutivo', hidden: true},
-        { id: 'biblioteca', name: 'Biblioteca', width: '10em'},
-        { id: 'fecha_solicitud', name: 'Fecha Solicitud', width: '9em'},
+        { id: 'consecutivo_id', name: 'consecutivo', hidden: true},
+        { id: 'Biblioteca', name: 'Biblioteca', width: '10em'},
+        { id: 'fech_naci_usua', name: 'Fecha Nacimiento', width: '5em'},
         { id: 'nombre', name: 'Nombre', width: '14em'},
-        { id: 'n_documento', name: 'Documento No.', width: '12em',},
+        { id: 'docu_pais_usua', name: 'Documento No.', width: '12em'},
         {
             name: 'Acción',
             width: '9em',
@@ -145,6 +145,7 @@ window.formSeguimiento = (idSeguimiento) => {
         }
     )
     .then((response) => response.text().then(text => {
+
         $(".ui-dialog-title").text("INFORMACIÓN DEL AFILIADO");
         $("#dialog-form").html(text);
         $("#dialog-form").dialog("open");
@@ -154,6 +155,16 @@ window.formSeguimiento = (idSeguimiento) => {
         $("#programa").select2();
         $("#barrio").select2();
         $("#convenio").select2();
+
+        $("#diremuni").change((eve)=>{
+            if(eve.currentTarget.value == 11){
+                $("#localidad").attr('disabled', false);
+                return;
+            }
+            $("#localidad").attr('disabled', true);
+            $("#localidad").val('').trigger('change');
+        });
+
         $("#localidad").change((eve)=>{
             fetch(`api/localidad/${eve.currentTarget.value}/barrio`,
                 {
@@ -163,9 +174,12 @@ window.formSeguimiento = (idSeguimiento) => {
                 }
             )
             .then((response) => response.json().then( json => {
-                
+                $("#barrio").empty();
+                $("#barrio").select2({
+                    data: json
+                });
             }));
-            
         });
+
     }));
 }

@@ -28,10 +28,9 @@ class ConsecutivoController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
-     */
-    public function getLibraries(Request $request)
-    {
-        $consecutivos = Consecutivos::select(['id AS id', 'biblioteca AS text'])
+     */ 
+    public function getLibraries(Request $request){
+        $consecutivos = Consecutivos::select(['Id_Biblioteca AS id', 'Biblioteca AS text'])
             ->where('tipo', $request->get("type"))  // Filtra por el valor de 'type' en la solicitud
             ->get()->toArray();  // Obtiene los resultados como un arreglo
 

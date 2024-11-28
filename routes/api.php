@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\ConsecutivoController;
 use App\Http\Controllers\Api\UsuariosController;
 use App\Http\Controllers\Api\BibliotecaController;
 use App\Http\Controllers\Api\RegistrosController;
-
+use App\Http\Controllers\Api\PrestamosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,18 +23,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//SEGUIMIENTO MODULE
+// PRESTAMOS
+Route::get('prestamos/{id}/get',   [PrestamosController::class, 'get']);
+
+// SEGUIMIENTO MODULE
 Route::get('/registro/{library}/get',   [RegistrosController::class, 'get']);
 Route::get('/registro/form/{id}',       [RegistrosController::class, 'getForm']);
 Route::get('/localidad/{id}/barrio',    [RegistrosController::class, 'getBarrio']);
 
-//USERS->BIBLIOTECA MODULE
+// USERS->BIBLIOTECA MODULE
 Route::get('/biblioteca/form',      [BibliotecaController::class, 'getForm']);
 Route::post('/biblioteca',          [BibliotecaController::class, 'set']);
 Route::get('/biblioteca/{id}',      [BibliotecaController::class, 'get']);
 Route::post('/biblioteca/{id}',     [BibliotecaController::class, 'update']);
 
-//USERS MODULE
+// USERS MODULE
 Route::get('/users/view',               [UsuariosController::class, 'getForm']);
 Route::get('/users/view/new',           [UsuariosController::class, 'setUser']);
 Route::get('/users/view/{idUser}/edit', [UsuariosController::class, 'updateForm']);

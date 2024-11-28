@@ -20,7 +20,7 @@ $(document).ready(function () {
                 $('#espacio').empty().trigger('change');
                 $("#espacio").select2({
                     data: json
-                })
+                });
                 $("#espacio").val(defaultLibrary).trigger('change');
             })
         )

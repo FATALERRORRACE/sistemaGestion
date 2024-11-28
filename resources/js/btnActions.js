@@ -3,10 +3,8 @@ import { Seguimiento } from './seguimiento';
 import { Utilities } from './utils';
 import { Prestamos } from './prestamos';
 import $ from 'jquery';
-import 'jquery-ui';
 
-var activeMenu;// for whole content or specific modal
-var activeSubMenu;// for whole content or specific modal
+var activeMenu, activeSubMenu;// for whole content or specific modal
 var instanceUtils;// Base Instance
 var instanceUsers, instanceSeguimiento, prestamosInstance;
 $(document).ready(function () {

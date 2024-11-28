@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Registro;
-use App\Models\Barrio;
+use App\Models\Usuarios;
 use App\Models\Localidad;
+use App\Models\Barrios;
+use App\Models\Departamentos;
+use App\Models\Municipios;
+use App\Models\Nivelescolaridad;
+use App\Models\Ocupaciones;
 use Illuminate\Support\Facades\DB;
 
 class RegistrosController extends Controller
@@ -21,37 +25,15 @@ class RegistrosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getForm(int $id, Request $request){
-        $localidades = [
-            1 => "1 - Usaquén",
-            2 => "2 - Chapinero",
-            3 => "3 - Santa Fe",
-            4 => "4 - San Cristóbal",
-            5 => "5 - Usme",
-            6 => "6 - Tunjuelito",
-            7 => "7 - Bosa",
-            8 => "8 - Kennedy",
-            9 => "9 - Fontibón",
-            10 =>  "10 - Engativá",
-            11 =>  "11 - Suba",
-            12 =>  "12 - Barrios Unidos",
-            13 =>  "13 - Teusaquillo",
-            14 =>  "14 - Los Mártires",
-            15 =>  "15 - Antonio Nariño",
-            16 =>  "16 - Puente Aranda",
-            17 =>  "17 - Candelaria",
-            18 =>  "18 - Rafael Uribe Uribe",
-            19 =>  "19 - Ciudad Bolívar",
-            20 =>  "20 - Sumapaz",
-            21 =>  "20 - Otros"
-        ];
-        
-        $registro = Registro::where(['consecutivo' => $id])->first();
-        $registro->barrio = ucwords(strtolower($registro->barrio));
-        
-        //BARRIO
-        $barrio = $this->getBarrioRegistro($registro);
-
-        return view('seguimientoForm', ['localidades' => $localidades,'registro' => $registro, 'barrio' => $barrio['barrio'], 'barrios' => $barrio['barrios'], ]);
+        $registro = Usuarios::where(['consecutivo_id' => $id])->first();
+        return view('seguimientoForm', [
+            'departamentos' => Departamentos::get()->toArray(),
+            'localidades' => Localidad::select('id', 'nombre')->get()->toArray(),
+            'registro' => $registro, 
+            'ocupaciones' => Ocupaciones::select('id', 'nomb_ocup')->get()->toArray(),
+            'generos' => Ocupaciones::select('id', 'nomb_ocup')->get()->toArray(),
+            'barrios' => $registro->localidad_numero ? Barrios::where('localidad', '=', $registro->localidad_numero )->get()->toArray() : [],
+        ]);
     }
 
     /**
@@ -62,13 +44,11 @@ class RegistrosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getBarrioRegistro($registro){
-        $barrio = Barrio::where('nombre', '=', $registro->barrio )->first();
         $barrios = [];
-        if($barrio)
-            $barrios = Barrio::where('localidad', '=', $barrio->localidad )->get()->toArray();
+        if($registro->localidad_numero)
+            $barrios = Barrios::where('localidad', '=', $registro->localidad_numero )->get()->toArray();
         // Retorna la vista 'newusuario' para mostrar el formulario de creación de un nuevo usuario
         return [
-            'barrio' => $barrio,
             'barrios' => $barrios,
         ];
     }
@@ -85,20 +65,16 @@ class RegistrosController extends Controller
      */
     public function get(int $library, Request $request)
     {
-        $values = Registro::select(
-            DB::raw("CONCAT(registro.nombres, '', registro.apellidos) AS nombre"), 'registro.consecutivo',
-            'consecutivos.biblioteca', 'registro.fecha_solicitud', 'registro.n_documento'
+        $values = Usuarios::select(
+            DB::raw("CONCAT(usuarios.prim_nomb_usua, ' ',usuarios.prim_apel_usua) AS nombre"), 
+            'usuarios.consecutivo_id', 'consecutivos.Biblioteca', 'usuarios.fech_naci_usua', 'usuarios.docu_pais_usua', 'usuarios.prim_nomb_usua'
         )
-        ->leftjoin('consecutivos', 'consecutivos.id', '=', 'registro.biblioteca')
-        ->where('registro.estado', '=', '0')
-        ->where(['registro.biblioteca' => $library])
-        ->where('registro.t_afiliado', '=', '1')
-        ->whereNull('registro.fecha_activacion')
+        ->leftjoin('consecutivos', 'consecutivos.Id_Biblioteca', '=', 'usuarios.consecutivo_id')
+        ->where(['usuarios.consecutivo_id' => $library])
         ->get()->toArray();
         return [
             'total' => count($values),
             'data' => $values
-                
         ];
     }
 
@@ -108,6 +84,8 @@ class RegistrosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getBarrio(int $localidad, Request $request){
-        return Barrio::where('localidad', '=', $localidad)->get()->toArray();   
+        return Barrios::select('id', 'nomb_barr as text')
+            ->where('id', '=', $localidad)->get()->toArray();
     }
+
 }

@@ -80,9 +80,8 @@ var Prestamos = /*#__PURE__*/function () {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               instance = this;
-              instance.instanceGrid();
               if (!(gridInstance !== undefined)) {
-                _context.next = 6;
+                _context.next = 5;
                 break;
               }
               gridInstance.updateConfig({
@@ -98,15 +97,15 @@ var Prestamos = /*#__PURE__*/function () {
                 },
                 data: []
               }).forceRender();
-              _context.next = 9;
-              break;
-            case 6:
               _context.next = 8;
+              break;
+            case 5:
+              _context.next = 7;
               return new gridjs__WEBPACK_IMPORTED_MODULE_0__.Grid({
                 className: {
                   tr: 'table-tr-custom'
                 },
-                columns: this.columns,
+                columns: instance.columns,
                 search: true,
                 sort: true,
                 pagination: true,
@@ -125,9 +124,9 @@ var Prestamos = /*#__PURE__*/function () {
                   }
                 }
               }).render(document.getElementById("tableContent"));
-            case 8:
+            case 7:
               gridInstance = _context.sent;
-            case 9:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -184,23 +183,23 @@ var Seguimiento = /*#__PURE__*/function () {
   function Seguimiento() {
     _classCallCheck(this, Seguimiento);
     _defineProperty(this, "columns", [{
-      id: 'consecutivo',
+      id: 'consecutivo_id',
       name: 'consecutivo',
       hidden: true
     }, {
-      id: 'biblioteca',
+      id: 'Biblioteca',
       name: 'Biblioteca',
       width: '10em'
     }, {
-      id: 'fecha_solicitud',
-      name: 'Fecha Solicitud',
-      width: '9em'
+      id: 'fech_naci_usua',
+      name: 'Fecha Nacimiento',
+      width: '5em'
     }, {
       id: 'nombre',
       name: 'Nombre',
       width: '14em'
     }, {
-      id: 'n_documento',
+      id: 'docu_pais_usua',
       name: 'Documento No.',
       width: '12em'
     }, {
@@ -384,13 +383,26 @@ window.formSeguimiento = function (idSeguimiento) {
       jquery__WEBPACK_IMPORTED_MODULE_2___default()("#programa").select2();
       jquery__WEBPACK_IMPORTED_MODULE_2___default()("#barrio").select2();
       jquery__WEBPACK_IMPORTED_MODULE_2___default()("#convenio").select2();
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()("#diremuni").change(function (eve) {
+        if (eve.currentTarget.value == 11) {
+          jquery__WEBPACK_IMPORTED_MODULE_2___default()("#localidad").attr('disabled', false);
+          return;
+        }
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()("#localidad").attr('disabled', true);
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()("#localidad").val('').trigger('change');
+      });
       jquery__WEBPACK_IMPORTED_MODULE_2___default()("#localidad").change(function (eve) {
         fetch("api/localidad/".concat(eve.currentTarget.value, "/barrio"), {
           method: "GET",
           headers: headers,
           redirect: "follow"
         }).then(function (response) {
-          return response.json().then(function (json) {});
+          return response.json().then(function (json) {
+            jquery__WEBPACK_IMPORTED_MODULE_2___default()("#barrio").empty();
+            jquery__WEBPACK_IMPORTED_MODULE_2___default()("#barrio").select2({
+              data: json
+            });
+          });
         });
       });
     });
@@ -414,8 +426,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gridjs_l10n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gridjs/l10n */ "./node_modules/gridjs/l10n/dist/l10n.module.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var jquery_ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery-ui */ "./node_modules/jquery-ui/ui/widget.js");
-/* harmony import */ var jquery_ui__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery_ui__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery_ui_ui_widgets_dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery-ui/ui/widgets/dialog */ "./node_modules/jquery-ui/ui/widgets/dialog.js");
+/* harmony import */ var jquery_ui_ui_widgets_dialog__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_dialog__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! toastr */ "../../node_modules/toastr/toastr.js");
 /* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -453,7 +465,7 @@ var Usuarios = /*#__PURE__*/function () {
       name: "Email",
       width: '150px'
     }, {
-      id: "biblioteca",
+      id: "Biblioteca",
       name: "Biblioteca",
       width: '150px'
     }, {
@@ -686,7 +698,6 @@ window.editUser = function (idUser) {
       });
     });
   });
-  console.log($idUser);
 };
 
 /***/ }),
@@ -804,8 +815,8 @@ var Utilities = /*#__PURE__*/function () {
                     ;
                     parent = parent.parent();
                   } while (parent[0].localName != 'div');
-                  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".dropdown-menu-hover").fadeOut(3000);
-                  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".sub-dropdown-menu").fadeOut(3000);
+                  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".dropdown-menu-hover").fadeOut(2000);
+                  jquery__WEBPACK_IMPORTED_MODULE_0___default()(".sub-dropdown-menu").fadeOut(2000);
                   setTimeout(function () {
                     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".dropdown-menu-hover").attr('style', false);
                     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".sub-dropdown-menu").attr('style', false);
@@ -38779,16 +38790,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _prestamos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prestamos */ "./resources/js/prestamos.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var jquery_ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery-ui */ "./node_modules/jquery-ui/ui/widget.js");
-/* harmony import */ var jquery_ui__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery_ui__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
 
-
-var activeMenu; // for whole content or specific modal
-var activeSubMenu; // for whole content or specific modal
+var activeMenu, activeSubMenu; // for whole content or specific modal
 var instanceUtils; // Base Instance
 var instanceUsers, instanceSeguimiento, prestamosInstance;
 jquery__WEBPACK_IMPORTED_MODULE_4___default()(document).ready(function () {

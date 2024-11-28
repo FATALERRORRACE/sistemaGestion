@@ -27,7 +27,6 @@ export class Prestamos {
 
     async render() {
         var instance = this;
-        instance.instanceGrid();
         if(gridInstance !== undefined)
             gridInstance.updateConfig({
                 columns: instance.columns,
@@ -43,7 +42,7 @@ export class Prestamos {
                 className: {
                     tr: 'table-tr-custom',
                 },
-                columns: this.columns,
+                columns: instance.columns,
                 search: true,
                 sort: true,
                 pagination: true,

@@ -47,8 +47,4 @@ class Biblousuarios extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function username(){
-        dump("this must work");
-        return 'username';
-    }
 }

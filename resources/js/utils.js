@@ -73,8 +73,8 @@ export class Utilities {
                     parent = parent.parent();
                 } while ( parent[0].localName != 'div');
 
-                $(".dropdown-menu-hover").fadeOut(3000)
-                $(".sub-dropdown-menu").fadeOut(3000)
+                $(".dropdown-menu-hover").fadeOut(2000)
+                $(".sub-dropdown-menu").fadeOut(2000)
                 setTimeout(() => {
                     $(".dropdown-menu-hover").attr('style', false);
                     $(".sub-dropdown-menu").attr('style', false);

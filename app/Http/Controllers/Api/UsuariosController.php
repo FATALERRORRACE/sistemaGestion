@@ -54,8 +54,8 @@ class UsuariosController extends Controller
         return view(
             'updateusuario', 
             [
-                'user' => Biblousuarios::select('biblousuarios.*', 'consecutivos.biblioteca')
-                    ->leftjoin('consecutivos', 'consecutivos.id', '=', 'biblousuarios.biblioteca')
+                'user' => Biblousuarios::select('biblousuarios.*', 'consecutivos.Biblioteca')
+                    ->leftjoin('consecutivos', 'consecutivos.Id_Biblioteca', '=', 'biblousuarios.biblioteca')
                     ->where(['biblousuarios.id' => $user])
                     ->get()
                     ->first()
@@ -114,7 +114,7 @@ class UsuariosController extends Controller
                                     'biblousuarios.alias', 'biblousuarios.privilegios', 
                                     'biblousuarios.estado')
             ->where(['biblousuarios.biblioteca' => $library])
-            ->leftjoin('consecutivos', 'consecutivos.id', '=', 'biblousuarios.biblioteca')
+            ->leftjoin('consecutivos', 'consecutivos.Id_Biblioteca', '=', 'biblousuarios.Biblioteca')
             ->orderBy('estado', 'asc') // Ordena los usuarios por estado
             ->get()->toArray();
     }

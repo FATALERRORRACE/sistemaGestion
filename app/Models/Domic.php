@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Consecutivos extends Model
+class Domic extends Model
 {
 
+    protected $connection = 'mysql2';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $table = 'consecutivos';
+    protected $table = 'domic';
 
     /**
      * The attributes that are mass assignable.
@@ -20,13 +21,6 @@ class Consecutivos extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'Id_Biblioteca',
-        'Biblioteca',
-        'Tipo',
-        'Aleph',
-        'Localidad',
-        'Proceso',
-        'Cod_Qr',
-        'B_Correo',
+        'Id', 'Cod', 'Item', 'Tit', 'Aut', 'F_Sol', 'Tel', 'Est', 'Loc', 'Dir', 'Bar', 'Bib'
     ];
 }
