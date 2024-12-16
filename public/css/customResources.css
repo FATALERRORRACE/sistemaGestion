@@ -74,7 +74,7 @@ input:checked+.slider:before {
 }
 
 .base-1-color {
-    color: #5F249F;
+    color: #5F249F !important;
     background-color: #fff;
 }
 
@@ -259,6 +259,7 @@ th.gridjs-th {
 .ui-dialog {
     border-radius: 0.25rem;
     padding: 8px;
+    border: 2px solid #e5e4e4 !important;
 }
 .switch {
     scale: 60%;
@@ -294,3 +295,4 @@ th.gridjs-th {
     padding-left: 10px;
     padding-right: 7px;
 }
+

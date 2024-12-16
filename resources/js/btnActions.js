@@ -2,11 +2,12 @@ import { Usuarios } from './usuarios';
 import { Seguimiento } from './seguimiento';
 import { Utilities } from './utils';
 import { Prestamos } from './prestamos';
+import { ConsultarInscritos } from './consultarInscritos';
 import $ from 'jquery';
 
 var activeMenu, activeSubMenu;// for whole content or specific modal
 var instanceUtils;// Base Instance
-var instanceUsers, instanceSeguimiento, prestamosInstance;
+var instanceUsers, instanceSeguimiento, prestamosInstance, consultarInscritos;
 $(document).ready(function () {
     instanceUtils = new Utilities;
     instanceUtils.render();
@@ -41,4 +42,18 @@ $(document).ready(function () {
         activeMenu = "prestamos";
     });
 
+    $('#submenu-15').click((ev) => {
+        if(!consultarInscritos) consultarInscritos = new ConsultarInscritos;
+        consultarInscritos.qrGenerate(activeSubMenu);
+        activeSubMenu = "QrCode";
+    });
+
+    $('#submenu-12').click((ev) => {
+        if(activeMenu == 'buscarinscritos') return;
+        if(!consultarInscritos) consultarInscritos = new ConsultarInscritos;
+        consultarInscritos.renderFindRegistered();
+        activeMenu = 'buscarinscritos';
+    });
+
+    
 });

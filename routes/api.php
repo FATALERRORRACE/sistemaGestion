@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\UsuariosController;
 use App\Http\Controllers\Api\BibliotecaController;
 use App\Http\Controllers\Api\RegistrosController;
 use App\Http\Controllers\Api\PrestamosController;
+use App\Http\Controllers\Api\QrController;
+use App\Http\Controllers\Api\InscritosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +46,14 @@ Route::get('/users/view/{idUser}/edit', [UsuariosController::class, 'updateForm'
 Route::post('/users/{idUser}/edit',     [UsuariosController::class, 'updateUser']);
 Route::get('/users/{library}/get',      [UsuariosController::class, 'get']);
 Route::post('/users',                   [UsuariosController::class, 'post']);
+
+// QR 
+Route::get('/qr/form',      [QrController::class, 'getForm']);
+Route::get('/qr/donwload/{id}/png',      [QrController::class, 'getPng']);
+Route::get('/qr/donwload/{id}/pdf',      [QrController::class, 'getPdf']);
+
+// CONSULTAR INSCRITOS
+Route::get('/inscritos/view',          [InscritosController::class, 'getForm']);
+
 
 Route::get('/libraries/get',            [ConsecutivoController::class, 'getLibraries']);

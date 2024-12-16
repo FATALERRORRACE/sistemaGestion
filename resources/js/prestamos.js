@@ -2,7 +2,6 @@ import { Grid, html } from "gridjs";
 import { esES } from "gridjs/l10n";
 import $ from 'jquery';
 import 'jquery-ui';
-import toastr from "toastr";
 
 export class Prestamos {
     columns = [
