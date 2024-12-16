@@ -102,7 +102,15 @@ export class ConsultarInscritos {
     }
 
     renderFindRegisteredUtils(text){
+        var instance = this;
         $("#tableContent").html(text);
+        var urlParams = 
+            `?documento=${$("#documento").val()}&
+            nombres=${$("#nombres").val()}&
+            apellidos=${$("#apellidos").val()}&
+            email=${$("#email").val()}&
+            consecutivo=${$("#espacio").val()}&
+            consecutivonm=${$("#espacio option:selected").text()}`;
         gridInstance = new Grid({
             className: {
                 tr: 'table-tr-custom',
@@ -113,10 +121,22 @@ export class ConsultarInscritos {
             resizable: true,
             pagination: true,
             server: {
-                url: `/api/inscritos/${$('#espacio').val()}/get`,
+                url: `/api/inscritos/${$('#espacio').val()}/get${urlParams}`,
                 then: data => data.data,
                 total: data => data.total
             }
         }).render(document.getElementById("tableinscritos"));
+        $("#espacio").off('change.inscritos').off('change.utilsespacio').off('change.qr');
+        $("#espacio").on('change.inscritos', (ev) => {
+            gridInstance.updateConfig({
+                columns: instance.columns,
+                server: {
+                    url: `/api/inscritos/${$('#espacio').val()}/get${urlParams}`,
+                    then: data => data.data,
+                    total: data => data.total
+                },
+                data: []
+            }).forceRender();
+        });
     }
 }

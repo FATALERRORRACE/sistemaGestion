@@ -54,6 +54,7 @@ Route::get('/qr/donwload/{id}/pdf',      [QrController::class, 'getPdf']);
 
 // CONSULTAR INSCRITOS
 Route::get('/inscritos/view',          [InscritosController::class, 'getForm']);
+Route::get('/inscritos/{id}/get',          [InscritosController::class, 'getData']);
 
 
 Route::get('/libraries/get',            [ConsecutivoController::class, 'getLibraries']);

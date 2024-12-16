@@ -11,14 +11,14 @@ class UsuariosDb extends Model
      *
      * @var array<int, string>
      */
-    protected $table = 'usuarios_db';
+    protected $table = 'usuarios_bd';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    public function scopeDocumento($query, $documento)
+    static public function scopeDocumento($query, $documento)
     {
         if ($documento) {
            return $query->where('docu_pais_usua' , $documento);
@@ -30,7 +30,7 @@ class UsuariosDb extends Model
      *
      * @var array<int, string>
      */
-    public function scopeEmail($query, $email)
+    static public function scopeEmail($query, $email)
     {
         if ($email)
            return $query->where('emai_usua' , $email);
@@ -44,7 +44,7 @@ class UsuariosDb extends Model
      *
      * @var array<int, string>
      */
-    public function scopeNombres($query, $nombres)
+    static public function scopeNombres($query, $nombres)
     {
         if ($nombres)
            return $query->where('prim_nomb_usua' , $nombres);
@@ -58,7 +58,7 @@ class UsuariosDb extends Model
      *
      * @var array<int, string>
      */
-    public function scopeApellido($query, $primApelUsua)
+    static public function scopeApellido($query, $primApelUsua)
     {
         if ($primApelUsua)
            return $query->where('prim_apel_usua' , $primApelUsua);
@@ -71,7 +71,7 @@ class UsuariosDb extends Model
      *
      * @var array<int, string>
      */
-    public function scopeConsecutivo($query, $consecutivo){
+    static public function scopeConsecutivo($query, $consecutivo){
         if ($consecutivo)
            return $query->where('consecutivo_id' , $consecutivo);
 

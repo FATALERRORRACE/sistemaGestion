@@ -158,7 +158,7 @@ window.editUser = (idUser) => {
         $("#save-change-user").off().click(() => {
             var dataNewUser = {};
             $("#nu-form").serializeArray().forEach(element => {
-                dataNewUser[element.name] = element.value
+                dataNewUser[element.name] = element.value;
             });
             if ($("#id-edit").val() != undefined) {
                 fetch(`/api/users/${$("#id-edit").val()}/edit`,
