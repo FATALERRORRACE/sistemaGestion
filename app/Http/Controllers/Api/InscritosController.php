@@ -49,18 +49,18 @@ class InscritosController extends Controller
         
         //$query->where('Biblioteca', $request->consecutivo);
         if ($request->documento)
-            $query->where('N_Documento', $request->documento);
+            $query->where('N_Documento', 'LIKE', "$request->documento%");
         if ($request->email)
-            $query->where('Email', $request->email);
+            $query->where('Email', 'LIKE', "$request->email%");
         if ($request->nombres)
-            $query->where('Nombres', $request->nombres);
+            $query->where('Nombres', 'LIKE', "$request->nombres%");
         if ($request->apellidos)
-            $query->where('Apellidos', $request->apellidos);
+            $query->where('Apellidos', 'LIKE', "$request->apellidos%");
 
-        $countData = 100;
-        //$countData = $query->count();
         $data = $query->take(100)->get()->toArray();
-
+        $countData = 100;
+        if(sizeof($data) < $countData)
+            $countData = sizeof($data);
         return [
             'total' => $countData,
             'data' => $data

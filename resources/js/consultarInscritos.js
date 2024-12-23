@@ -5,9 +5,12 @@ import 'jquery-ui';
 import toastr from "toastr";
 
 export class ConsultarInscritos {
+    controller = new AbortController();
+    signal = this.controller.signal;
+    sendSignal = 0;
     newOrEdit = "new";
-
-    							
+    actionSearch;
+    previousValue;
     columns = [
         //Apellidos
         //Barrio
@@ -43,14 +46,14 @@ export class ConsultarInscritos {
         //nomb_ident
 
 
-        { id: 'Consecutivo', name: 'Consecutivo'},
-        { id: 'Fecha_Solicitud', name: 'F. Solicitud'},
-        { id: 'bibliotecaNombre', name: 'Biblioteca Afiliación'},
-        { id: 'nombre', name: 'Nombre'},
-        { id: 'T_Afiliado', name: 'Afiliación', formatter: (cell) => `${cell == 1 ? 'En Línea' : '' }`},
-        { id: 'Codigo', name: 'C. Barras'},
-        { id: 'N_Documento', name: 'Documento No.'},
-        { id: '', name: 'Opciones'},
+        { id: 'Consecutivo', name: 'Consecutivo' },
+        { id: 'Fecha_Solicitud', name: 'F. Solicitud' },
+        { id: 'bibliotecaNombre', name: 'Biblioteca Afiliación' },
+        { id: 'nombre', name: 'Nombre' },
+        { id: 'T_Afiliado', name: 'Afiliación', formatter: (cell) => `${cell == 1 ? 'En Línea' : ''}` },
+        { id: 'Codigo', name: 'C. Barras' },
+        { id: 'N_Documento', name: 'Documento No.' },
+        { id: '', name: 'Opciones' },
         {
             name: 'Acción',
             width: '9em',
@@ -80,9 +83,9 @@ export class ConsultarInscritos {
                 redirect: "follow"
             }
         )
-        .then((response) => response.text().then(text => {
-            classContext.jqActions(text);
-        }));
+            .then((response) => response.text().then(text => {
+                classContext.jqActions(text);
+            }));
     }
 
     async jqActions(text) {
@@ -94,11 +97,11 @@ export class ConsultarInscritos {
             height: 'auto',
             width: '40em',
             modal: false,
-            open: function(event, ui) {
+            open: function (event, ui) {
                 $(".ui-dialog-title").text('');
                 $('#contain-e-t').css({ "z-index": "1000" });
             },
-            close: function(event, ui) {
+            close: function (event, ui) {
                 $('#contain-e-t').css({ "z-index": "10" });
             },
         });
@@ -122,7 +125,7 @@ export class ConsultarInscritos {
         $("#espacio").trigger('change.qr');
     }
 
-    renderFindRegistered(){
+    renderFindRegistered() {
         fetch(`api/inscritos/view`,
             {
                 method: "GET",
@@ -130,47 +133,100 @@ export class ConsultarInscritos {
                 redirect: "follow"
             }
         )
-        .then((response) => response.text().then(text => {
-            this.renderFindRegisteredUtils(text)
-        }));
+            .then((response) => response.text().then(text => {
+                this.renderFindRegisteredUtils(text)
+            }));
     }
 
-    renderFindRegisteredUtils(text){
-        var instance = this;
+    renderFindRegisteredUtils(text) {
+        var globalContext = this;
         $("#tableContent").html(text);
-        var urlParams = 
+        globalContext.getParamsGetAndRenderTable()
+        $("#espacio").off('change.inscritos').off('change.utilsespacio').off('change.qr');
+        $("#espacio").on('change.inscritos', (ev) => {
+            globalContext.getParamsGetAndRenderTable();
+        });
+        $('.gridjs-search-input').off().keydown((eve) => {
+            if(globalContext.previousValue != undefined && globalContext.previousValue == eve.currentTarget.value) 
+                return;
+    
+            globalContext.previousValue = eve ? eve.currentTarget.value : null;
+
+            clearTimeout(globalContext.actionSearch);
+            globalContext.actionSearch = setTimeout( () => {
+
+                if(globalContext.sendSignal){
+                    globalContext.controller.abort();
+                    globalContext.controller = new AbortController();
+                }
+                globalContext.sendSignal = 1;
+                let paramsGet =
+                    `?documento=${$("#documento").val()}&
+                    nombres=${$("#nombres").val()}&
+                    apellidos=${$("#apellidos").val()}&
+                    email=${$("#email").val()}&
+                    consecutivo=${$("#espacio").val()}&
+                    consecutivonm=${$("#espacio option:selected").text()}`;
+                fetch(`/api/inscritos/${$('#espacio').val()}/get${paramsGet}`,
+                {
+                    method: "GET",
+                    headers: headers,
+                    signal: globalContext.controller.signal,
+                })
+                .then((response) => response.json().then(json => {
+                    globalContext.sendSignal = 0;
+                    console.log(json);
+                }))
+                .catch((err)=>{
+                    gridInstance.updateConfig({
+                        columns: globalContext.columns,
+                        //signal: globalContext.controller.signal,
+                        data: err.data
+                    }).forceRender();
+                    console.log(err);
+                });
+                
+                
+            }, 700);
+        });
+    }
+
+    getParamsGetAndRenderTable() {
+        var globalContext = this;
+        let paramsGet =
             `?documento=${$("#documento").val()}&
             nombres=${$("#nombres").val()}&
             apellidos=${$("#apellidos").val()}&
             email=${$("#email").val()}&
             consecutivo=${$("#espacio").val()}&
             consecutivonm=${$("#espacio option:selected").text()}`;
-        gridInstance = new Grid({
-            className: {
-                tr: 'table-tr-custom',
-            },
-            columns: this.columns,
-            sort: true,
-            language: esES,
-            resizable: true,
-            pagination: true,
-            server: {
-                url: `/api/inscritos/${$('#espacio').val()}/get${urlParams}`,
-                then: data => data.data,
-                total: data => data.total
-            }
-        }).render(document.getElementById("tableinscritos"));
-        $("#espacio").off('change.inscritos').off('change.utilsespacio').off('change.qr');
-        $("#espacio").on('change.inscritos', (ev) => {
+        if (gridInstance)
             gridInstance.updateConfig({
-                columns: instance.columns,
+                columns: globalContext.columns,
                 server: {
-                    url: `/api/inscritos/${$('#espacio').val()}/get${urlParams}`,
+                    url: `/api/inscritos/${$('#espacio').val()}/get${paramsGet}`,
                     then: data => data.data,
                     total: data => data.total
                 },
                 data: []
             }).forceRender();
-        });
+        else
+            gridInstance = new Grid({
+                className: {
+                    tr: 'table-tr-custom',
+                },
+                columns: globalContext.columns,
+                sort: true,
+                signal: globalContext.signal,
+                language: esES,
+                resizable: true,
+                pagination: true,
+                server: {
+                    url: `/api/inscritos/${$('#espacio').val()}/get${paramsGet}`,
+                    then: data => data.data,
+                    total: data => data.total
+                }
+            }).render(document.getElementById("tableinscritos"));
+        
     }
 }
