@@ -9,13 +9,47 @@ export class ConsultarInscritos {
 
     							
     columns = [
-        { id: '', name: 'Consecutivo'},
-        { id: '', name: 'F. Solicitud'},
-        { id: '', name: 'Biblioteca Afiliación'},
-        { id: '', name: 'Nombre'},
-        { id: '', name: 'Afiliación'},
-        { id: '', name: 'C. Barras'},
-        { id: '', name: 'Documento No.'},
+        //Apellidos
+        //Barrio
+        //Biblioteca
+        //Celular
+        //Consecutivo
+        //Contras_Usr
+        //Convenio
+        //Direccion
+        //Edad
+        //Email
+        //Escolaridad
+        //Estado
+        //Estrato
+        //Fecha_Activacion
+        //Fecha_Nacimiento
+        //Fecha_Solicitud
+        //Genero
+        //Localidad
+        //N_Documento
+        //Nombres
+        //Ocupacion
+        //Pais_expe_docu
+        //Pais_nacionalidad
+        //Permite_Envios
+        //Programa
+        //T_Afiliado
+        //Tel_Fijo
+        //Tel_Oficina
+        //Tipo_Documento
+        //Tipo_Vivienda
+        //Usr_Disc
+        //nomb_ident
+
+
+        { id: 'Consecutivo', name: 'Consecutivo'},
+        { id: 'Fecha_Solicitud', name: 'F. Solicitud'},
+        { id: 'bibliotecaNombre', name: 'Biblioteca Afiliación'},
+        { id: 'nombre', name: 'Nombre'},
+        { id: 'T_Afiliado', name: 'Afiliación', formatter: (cell) => `${cell == 1 ? 'En Línea' : '' }`},
+        { id: 'Codigo', name: 'C. Barras'},
+        { id: 'N_Documento', name: 'Documento No.'},
         { id: '', name: 'Opciones'},
         {
             name: 'Acción',

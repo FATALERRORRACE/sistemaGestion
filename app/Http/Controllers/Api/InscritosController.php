@@ -34,9 +34,19 @@ class InscritosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getData(Request $request){
-        //$query = registro::select(DB::raw("'{$request->consecutivonm}' AS bibliotecaNombre", 'registro.Consecutivo', 'registro.Fecha_Solicitud', 'registro.Biblioteca', 'registro.T_Afiliado', 'registro.N_Documento',));
-        $query = registro::select();
-        //->leftjoin('c_barras', 'c_barras.Documento', '=', 'registro.N_Documento');
+        
+        $query = registro::select(DB::raw(
+            "'{$request->consecutivonm}' AS bibliotecaNombre, 
+            CONCAT(registro.Nombres, ' ', registro.Apellidos) as nombre,
+            c_barras.Codigo,
+            registro.Consecutivo,
+            registro.Fecha_Solicitud,
+            registro.Biblioteca,
+            registro.T_Afiliado,
+            registro.N_Documento", 
+        ))->leftjoin('c_barras', 'c_barras.Documento', '=', 'registro.N_Documento');
+        //$query = registro::select();
+        
         //$query->where('Biblioteca', $request->consecutivo);
         if ($request->documento)
             $query->where('N_Documento', $request->documento);
@@ -47,8 +57,9 @@ class InscritosController extends Controller
         if ($request->apellidos)
             $query->where('Apellidos', $request->apellidos);
 
-        $countData = $query->count();
-        $data = $query->take(1000)->get()->toArray();
+        $countData = 100;
+        //$countData = $query->count();
+        $data = $query->take(100)->get()->toArray();
 
         return [
             'total' => $countData,
